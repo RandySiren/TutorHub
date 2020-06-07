@@ -4,11 +4,13 @@ CP317 Software Engineering Project
 
 ## READ ME FIRST
 
+```
 07/06/2020: .gitkeep files can safely be deleted once you add another file in the folder (only there to keep folder on remote repository), if you are deleting files from a folder and need the folder to persist, please create a .gitkeep.
 
 07/06/2020: Always pull master to your branch and merge any changes, master will only hold code that is stable.
 
 07/06/2020: Look at this README.md at least once when you work on the project to stay up to date.
+```
 
 ## Installation
 
