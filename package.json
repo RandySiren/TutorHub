@@ -4,10 +4,10 @@
 	"description": "CP317 Software Engineering Project",
 	"author": "Mandeep Sran",
 	"contributors": [],
-	"main": "index.js",
+	"main": "app.js",
 	"scripts": {
-		"start": "node app.js",
-		"dev": "nodemon app.js",
+		"start": "node src/app.js",
+		"dev": "nodemon src/app.js",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"repository": {
@@ -22,10 +22,13 @@
 	"homepage": "https://github.com/RandySiren/TutorHub#readme",
 	"dependencies": {
 		"chalk": "^4.0.0",
+		"cookie-parser": "^1.4.5",
 		"dotenv": "^8.2.0",
 		"errorhandler": "^1.5.1",
 		"express": "^4.17.1",
-		"mongoose": "^5.9.16",
+		"hbs": "^4.1.1",
+		"helmet": "^3.22.0",
+		"mongoose": "^5.9.18",
 		"path": "^0.12.7"
 	},
 	"devDependencies": {

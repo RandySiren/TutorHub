@@ -7,15 +7,36 @@ const express = require('express');
 const dotenv = require('dotenv');
 const chalk = require('chalk');
 const errorHandler = require('errorhandler');
+const cookieParser = require('cookie-parser');
+const hbs = require('hbs');
+const path = require('path');
+const helmet = require('helmet');
+
+/**
+ * Create Express server.
+ */
+const app = express();
+
+/* Define paths for Express config */
+const publicDirectoryPath = path.join(__dirname, '../public');
+const viewsPath = path.join(__dirname, '../templates/views');
+const partialsPath = path.join(__dirname, '../templates/partials');
 
 /* Configure dotenv path to load environment variables for API keys and passwords */
 dotenv.config({ path: '.env' });
 
-/* Create Express server */
-const app = express();
-
 /* Setup port or rely on default */
 app.set('port', process.env.PORT || 8080);
+
+/* Setup static directory to serve */
+app.use(express.static(publicDirectoryPath));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(helmet()); // Secure inspection
+app.set('view engine', 'hbs');
+app.set('views', viewsPath);
+hbs.registerPartials(partialsPath);
 
 /* Homepage GET route */
 app.get('/', (req, res) => {
