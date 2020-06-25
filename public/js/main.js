@@ -1,1 +1,1 @@
-console.log("Starting page...");
+console.log('Starting page...');
