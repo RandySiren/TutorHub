@@ -1,0 +1,129 @@
+Pseudocode:
+
+app.js (Main entry point)
+-------------------------
+import required libraries
+
+app <- express
+
+publicDirectoryPath <- join path with '../public'
+viewsPath <- join path with '../templates/view'
+partialsPath <- join path with '../templates/partials'
+
+configure environment variables
+
+set port to environment variable or 8080 default
+
+make express use static method with parameter publicDirectoryPath
+make express use json
+make express use cookieParser
+make express use helmet
+make express use hbs as view engine
+make express register paths
+
+// register route handlers for all our routes (users, tutors, courses, search, contact, etc.)
+
+app.get('/', homepageAuth,  function() {
+	render(home);
+});
+
+app.get('/users', loginAuth, function() {
+	render(home);
+});
+
+
+if environment variable NODE_ENV = 'development' then
+	use default errorhandler
+else
+	register function to log error and send 500 status error from server
+
+app.listen(app.get(port), function() {
+	log('Running');
+});
+
+
+Database Schemas
+<-------------->
+User.js
+-------
+import required libraries
+
+userSchema <- new user(
+	_id: String,
+	username: String,
+	email: String,
+	password: String (encrypted with bcrypt)
+	courses: [{_id}],
+	type: one of Student, Tutor, Admin,
+)
+
+function generateAuthToken():
+	token <- generatetoken
+	saveToUser()
+	return token
+
+function findByCredentials():
+	user <- find(username)
+	if user is undefined then
+		throw Error('Unable to login')
+	isMatch <- compare inputted password to hashed password in user
+	if isMatch is false then
+		throw Error('Unable to login')
+	return user
+
+create middleware to hash password before saving to database
+
+User <- model the userSchema
+
+export User
+
+Course.js
+---------
+import required libraries
+
+courseSchema <- new course(
+	_id: String,
+	courseID: String,
+	name: String,
+	courseLevel: Num,
+	tutors: [{_id}],
+	subject: String
+)
+
+Course  <- model the courseSchema
+
+export Course
+
+
+Routes
+<---->
+User.js
+-------
+import required libraries
+
+function postRequestRegister('/register'):
+	user <- new User(formData)
+	try user.save()
+	catch based on error
+	return status
+
+function PostRequestLogin('/login'):
+	try:
+		user <- findByCredentials(data)
+		token <- generateAuthToken()
+		register token
+		// user now has valid token with browser cookie holding it
+	catch based on error
+
+function GetRequestUser('/:id'):
+	user <- find(id)
+	if user exists then:
+		if user is a tutor then:
+			return public data
+	return empty data
+
+function PostRequestLogout('/logout'):
+	find current token in browser and delete
+	redirect to '/' page
+
+
