@@ -126,4 +126,25 @@ function PostRequestLogout('/logout'):
 	find current token in browser and delete
 	redirect to '/' page
 
+Course.js
+---------
+import required libraries
+
+function postRequestNewCourse(course):
+	course <- new Course(course.json)
+	try course.save()
+	catch based on error
+	return status
+
+function getRequestCourse(id):
+	course <- find(id)
+	if course exists then:
+		return course data
+	return empty data
+
+function deleteRequestCourse(id):
+	course <- find(id)
+	try deleteOne(course)
+	return success or fail
+
 
