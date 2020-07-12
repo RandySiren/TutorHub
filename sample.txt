@@ -1,0 +1,13 @@
+Sample Users, Insitutions, and Courses for testing.
+
+Tutors: 5
+Brandon, Tim, Joe, Mandeep, Jordan
+
+Students: 20
+Simon, Adam, John, Bob, Steve, Alex, Luke, Cameron, James, Cole, Kyle, Liam, Craig, Zack, Daniel, Owen, Robert, Eric, Brian, Jason
+
+Insitutions: 1
+Wilfrid Laurier University
+
+Courses: 12
+CP102, CP104, CP164, CP212, CP213, CP216, CP220, CP264, CP312, CP317, CP363, CP386
