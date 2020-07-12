@@ -43,6 +43,20 @@ app.get('/', (req, res) => {
     res.render('home');
 });
 
+app.get('/signup', (req, res) => {
+    res.render('signup');
+});
+
+app.post('/signup', (req, res) => {
+    const formData = {
+        email: req.body.email,
+        password: req.body.password,
+    };
+    console.log(`E-mail ${formData.email}\nPassword: ${formData.password}`);
+
+    // res.redirect('login');
+});
+
 /* Setup error handler */
 if (process.env.NODE_ENV === 'development') {
     // only use in development
