@@ -4,6 +4,10 @@ CP317 Software Engineering Project
 
 ## READ ME FIRST
 
+12/07/2020:
+
+> Added base structure if you'd like to practice building routes you can do so buy adding controllers and attaching them to the routes, there should be no need to touch app.js
+
 07/06/2020:
 
 > .gitkeep files can safely be deleted once you add another file in the folder (only there to keep folder on remote repository), if you are deleting files from a folder and need the folder to persist, please create a .gitkeep.
