@@ -35,7 +35,7 @@ userSchema.pre('save', function (next) {
         bcrypt.hash(user.password, salt, (err, hash) => {
             if (err) return next(err);
             user.password = hash;
-            next();
+            return next();
         });
     });
 });
@@ -43,7 +43,7 @@ userSchema.pre('save', function (next) {
 /**
  * Helper method for validating password
  */
-userSchema.methods.comparePassword = async (candidatePassword, cb) => {
+userSchema.methods.comparePassword = async function (candidatePassword, cb) {
     const user = this;
     await bcrypt.compare(candidatePassword, user.password, (err, same) => {
         cb(err, same);

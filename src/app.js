@@ -11,10 +11,10 @@ const cookieParser = require('cookie-parser');
 const hbs = require('hbs');
 const path = require('path');
 const helmet = require('helmet');
-
+const session = require('express-session');
 const passport = require('passport');
-const User = require('./models/User');
-const auth = require('./middleware/auth');
+
+const routerHandler = require('./routes/routeHandler');
 
 /**
  * Create Express server.
@@ -33,7 +33,7 @@ dotenv.config({ path: '.env' });
 app.set('port', process.env.PORT || 8080);
 
 /* Connect to MongoDB */
-const mongoose = require('./database/connection');
+require('./database/connection');
 
 /* Setup static directory to serve */
 app.use(express.static(publicDirectoryPath));
@@ -41,6 +41,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(helmet()); // Secure inspection
+app.use(
+    session({
+        secret: process.env.SESSION_SECRET,
+        resave: true,
+        saveUninitialized: true,
+        cookie: { maxAge: 1209600000 },
+    })
+);
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -48,38 +56,10 @@ app.set('view engine', 'hbs');
 app.set('views', viewsPath);
 hbs.registerPartials(partialsPath);
 
-/* Homepage GET route */
-app.get('/', (req, res) => {
-    res.render('home');
-});
+/* Attach routes */
+app.use(routerHandler);
 
-app.get('/login', (req, res) => {
-    res.render('login');
-});
-
-app.get('/signup', (req, res) => {
-    res.render('signup');
-});
-
-app.post('/signup', async (req, res, next) => {
-    const user = new User.User({
-        email: req.body.email,
-        password: req.body.password,
-    });
-    try {
-        await user.save();
-        console.log('Successfully registered!'); // TODO: Delete later
-        return res.status(201).redirect('login');
-    } catch (err) {
-        if (err.code === 11000) {
-            console.error(chalk.red('Email in use')); // TODO: Replace with flash message
-            return res.status(400).redirect('signup');
-        }
-        return next(err);
-    }
-});
-
-/* Error handling middleware */
+/* Error handling middleware, middlewares are used in order of added */
 app.use((err, req, res, next) => {
     console.error(chalk.red('ERROR OCCURED'));
     console.error(err.stack);

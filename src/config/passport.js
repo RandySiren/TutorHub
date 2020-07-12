@@ -1,7 +1,7 @@
 const passport = require('passport');
 const { Strategy: LocalStrategy } = require('passport-local');
 
-const User = require('../models/User');
+const { User } = require('../models/User');
 
 passport.serializeUser((user, done) => {
     done(null, user.id);
@@ -41,6 +41,7 @@ passport.use(
     )
 );
 
+/* If the user is not logged in, we kick them out! */
 exports.isAuthenticated = (req, res, next) => {
     if (req.isAuthenticated()) return next();
     res.redirect('/login');
