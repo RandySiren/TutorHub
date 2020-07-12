@@ -7,7 +7,8 @@
         "no-unused-vars": "off",
         "prettier/prettier": ["error"],
         "consistent-return": "off",
-        "no-shadow": "off"
+        "no-shadow": "off",
+        "func-names": "off"
     },
     "plugins": ["prettier"],
     "env": {

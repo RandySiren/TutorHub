@@ -17,3 +17,9 @@ mongoose.connect(process.env.DB_URI, (err) => {
         console.log(chalk.green('✓ Connected to database.'));
     }
 });
+
+const disconnect = () => {
+    return mongoose.connection.close();
+};
+
+module.exports = { disconnect };

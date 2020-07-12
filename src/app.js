@@ -33,7 +33,7 @@ dotenv.config({ path: '.env' });
 app.set('port', process.env.PORT || 8080);
 
 /* Connect to MongoDB */
-require('./database/connection');
+const mongoose = require('./database/connection');
 
 /* Setup static directory to serve */
 app.use(express.static(publicDirectoryPath));
@@ -43,6 +43,7 @@ app.use(cookieParser());
 app.use(helmet()); // Secure inspection
 app.use(passport.initialize());
 app.use(passport.session());
+
 app.set('view engine', 'hbs');
 app.set('views', viewsPath);
 hbs.registerPartials(partialsPath);
@@ -52,18 +53,36 @@ app.get('/', (req, res) => {
     res.render('home');
 });
 
+app.get('/login', (req, res) => {
+    res.render('login');
+});
+
 app.get('/signup', (req, res) => {
     res.render('signup');
 });
 
-app.post('/signup', (req, res) => {
-    const formData = {
+app.post('/signup', async (req, res, next) => {
+    const user = new User.User({
         email: req.body.email,
         password: req.body.password,
-    };
-    console.log(`E-mail: ${formData.email}\nPassword: ${formData.password}`);
-    res.render('signup');
-    // res.redirect('login');
+    });
+    try {
+        await user.save();
+        console.log('Successfully registered!'); // TODO: Delete later
+        return res.status(201).redirect('login');
+    } catch (err) {
+        if (err.code === 11000) {
+            console.error(chalk.red('Email in use')); // TODO: Replace with flash message
+            return res.status(400).redirect('signup');
+        }
+        return next(err);
+    }
+});
+
+/* Error handling middleware */
+app.use((err, req, res, next) => {
+    console.error(chalk.red('ERROR OCCURED'));
+    console.error(err.stack);
 });
 
 /* Setup error handler */

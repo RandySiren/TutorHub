@@ -12,6 +12,12 @@ CP317 Software Engineering Project
 
 > Look at this README.md at least once when you work on the project to stay up to date.
 
+## TODO
+
+List of things to add in the future but held off (not an exhaustive list)
+
+> Flash messages (connect-flash and express-session)
+
 ## Installation
 
 Use the npm package manager to install TutorHub to setup for development.
