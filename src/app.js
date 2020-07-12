@@ -12,8 +12,8 @@ const hbs = require('hbs');
 const path = require('path');
 const helmet = require('helmet');
 
-const User = require('./models/User');
 const passport = require('passport');
+const User = require('./models/User');
 const auth = require('./middleware/auth');
 
 /**
