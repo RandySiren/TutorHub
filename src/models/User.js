@@ -1,5 +1,3 @@
-/* eslint-disable no-shadow */
-
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 
