@@ -11,9 +11,10 @@ const cookieParser = require('cookie-parser');
 const hbs = require('hbs');
 const path = require('path');
 const helmet = require('helmet');
-const bcrypt = require('bcrypt');
 
 const User = require('./models/User');
+const passport = require('passport');
+const auth = require('./middleware/auth');
 
 /**
  * Create Express server.
@@ -40,6 +41,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(helmet()); // Secure inspection
+app.use(passport.initialize());
+app.use(passport.session());
 app.set('view engine', 'hbs');
 app.set('views', viewsPath);
 hbs.registerPartials(partialsPath);

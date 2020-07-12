@@ -1,5 +1,4 @@
 /* eslint-disable no-shadow */
-/* eslint-disable consistent-return */
 
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
@@ -21,14 +20,6 @@ const userSchema = new Schema({
         required: true,
         trim: true,
     },
-    tokens: [
-        {
-            token: {
-                type: String,
-                required: true,
-            },
-        },
-    ],
 });
 
 /**
@@ -48,6 +39,16 @@ userSchema.pre('save', async (next) => {
         });
     });
 });
+
+/**
+ * Helper method for validating password
+ */
+userSchema.methods.comparePassword = async (candidatePassword, cb) => {
+    const user = this;
+    await bcrypt.compare(candidatePassword, user.password, (err, same) => {
+        cb(err, same);
+    });
+};
 
 const User = mongoose.model('User', userSchema, 'users');
 

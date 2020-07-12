@@ -5,7 +5,9 @@
         "no-tabs": "off",
         "no-console": "off",
         "no-unused-vars": "off",
-        "prettier/prettier": ["error"]
+        "prettier/prettier": ["error"],
+        "consistent-return": "off",
+        "no-shadow": "off"
     },
     "plugins": ["prettier"],
     "env": {
