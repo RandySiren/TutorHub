@@ -11,6 +11,9 @@ const cookieParser = require('cookie-parser');
 const hbs = require('hbs');
 const path = require('path');
 const helmet = require('helmet');
+const bcrypt = require('bcrypt');
+
+const User = require('./models/User');
 
 /**
  * Create Express server.
@@ -27,6 +30,9 @@ dotenv.config({ path: '.env' });
 
 /* Setup port or rely on default */
 app.set('port', process.env.PORT || 8080);
+
+/* Connect to MongoDB */
+require('./database/connection');
 
 /* Setup static directory to serve */
 app.use(express.static(publicDirectoryPath));
@@ -52,8 +58,8 @@ app.post('/signup', (req, res) => {
         email: req.body.email,
         password: req.body.password,
     };
-    console.log(`E-mail ${formData.email}\nPassword: ${formData.password}`);
-
+    console.log(`E-mail: ${formData.email}\nPassword: ${formData.password}`);
+    res.render('signup');
     // res.redirect('login');
 });
 
