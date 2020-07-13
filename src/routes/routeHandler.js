@@ -2,7 +2,6 @@ const express = require('express');
 
 const router = new express.Router();
 const auth = require('../config/passport');
-
 const userController = require('../controllers/user');
 const homeController = require('../controllers/home');
 
@@ -19,10 +18,15 @@ router.get('/signup', userController.getSignup);
 router.post('/signup', userController.postSignup);
 
 // Post Logged in Routing (everything beyond this point needs to be authenticated)
-
+router.all('*', auth.isAuthenticated);
 /**
  * Homepage Routing
  */
-router.get('/', auth.isAuthenticated, homeController.getHome);
+router.get('/', homeController.getHome);
+
+/**
+ * User Endpoints
+ */
+router.get('/api/users', userController.getUsers);
 
 module.exports = router;

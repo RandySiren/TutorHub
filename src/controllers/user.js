@@ -4,7 +4,8 @@ const chalk = require('chalk');
 const { User } = require('../models/User');
 
 const getLogin = (req, res) => {
-    res.render('login', { title: 'Login' });
+    if (req.user) return res.redirect('/');
+    return res.render('login', { title: 'Login' });
 };
 
 const postLogin = (req, res, next) => {
@@ -17,13 +18,14 @@ const postLogin = (req, res, next) => {
         req.logIn(user, (err) => {
             if (err) return next(err);
             console.log(chalk.green('LOGGED IN'));
-            res.redirect('/');
+            return res.redirect('/');
         });
     })(req, res, next);
 };
 
 const getSignup = (req, res) => {
-    res.render('signup', { title: 'Signup' });
+    if (req.user) return res.redirect('/');
+    return res.render('signup', { title: 'Signup' });
 };
 
 const postSignup = async (req, res, next) => {
@@ -44,4 +46,13 @@ const postSignup = async (req, res, next) => {
     }
 };
 
-module.exports = { getLogin, postLogin, getSignup, postSignup };
+const getUsers = async (req, res, next) => {
+    try {
+        const users = await User.find({});
+        return res.send(users);
+    } catch (err) {
+        return next(err);
+    }
+};
+
+module.exports = { getLogin, postLogin, getSignup, postSignup, getUsers };
