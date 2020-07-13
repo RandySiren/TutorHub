@@ -28,7 +28,9 @@ router.get('/', homeController.getHome);
 /**
  * Course Routing
  */
-router.get('/courses', courseController.getCourseHome);
+router.get('/courses', courseController.getCoursesHome);
+router.get('/courses/add', courseController.getCoursesAdd);
+router.get('/courses/view', courseController.getCoursesView);
 router.get('/api/courses', courseController.getCourses);
 router.post('/api/courses/add', courseController.postCourse);
 

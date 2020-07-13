@@ -5,8 +5,16 @@ const { Course } = require('../models/Course');
 
 const data = require('../routes/data').links;
 
-const getCourseHome = (req, res) => {
+const getCoursesHome = (req, res) => {
     return res.render('course', data);
+};
+
+const getCoursesAdd = (req, res) => {
+    return res.render('courseAdd', data);
+};
+
+const getCoursesView = (req, res) => {
+    return res.render('courseView', data);
 };
 
 const postCourse = async (req, res, next) => {
@@ -38,4 +46,10 @@ const getCourses = async (req, res, next) => {
     });
 };
 
-module.exports = { getCourseHome, postCourse, getCourses };
+module.exports = {
+    getCoursesHome,
+    getCoursesAdd,
+    getCoursesView,
+    postCourse,
+    getCourses,
+};

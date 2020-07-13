@@ -4,21 +4,8 @@ const data = require('../routes/data').links;
  */
 const getHome = (req, res) => {
     res.render('home', {
-        data,
-        menu: [
-            {
-                route: '/courses/add',
-                name: 'Add a Course',
-            },
-            {
-                route: '/courses/delete',
-                name: 'Delete a Course',
-            },
-            {
-                route: '/courses/view',
-                name: 'View a Course',
-            },
-        ],
+        data: data.data,
+        menu: data.menu,
     });
 };
 
