@@ -13,7 +13,13 @@
 <body>
     <div id="page">
         {{>header}}
-
+        <div class="container-fluid">
+            {{#each this}}
+            <div>
+                <a href={{route}}>{{name}}</a>
+            </div>
+            {{/each}}
+        </div>
     </div>
     {{>footer}}
 

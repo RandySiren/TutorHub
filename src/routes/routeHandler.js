@@ -4,6 +4,7 @@ const router = new express.Router();
 const auth = require('../config/passport');
 const userController = require('../controllers/user');
 const homeController = require('../controllers/home');
+const courseController = require('../controllers/course');
 
 /**
  * Login Routing
@@ -25,7 +26,14 @@ router.all('*', auth.isAuthenticated);
 router.get('/', homeController.getHome);
 
 /**
- * User Endpoints
+ * Course Routing
+ */
+router.get('/courses', courseController.getCourseHome);
+router.get('/api/courses', courseController.getCourses);
+router.post('/api/courses/add', courseController.postCourse);
+
+/**
+ * User Routing
  */
 router.get('/api/users', userController.getUsers);
 router.get('/api/users/:id', userController.getUserById);

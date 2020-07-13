@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const courseSchema = new Schema({
-    courseID: {
+    courseId: {
         type: String,
         required: true,
         trim: true,
@@ -33,7 +33,7 @@ const courseSchema = new Schema({
     ],
 });
 
-courseSchema.index({ courseID: 1, school: 1 }, { unique: true });
+courseSchema.index({ courseId: 1, school: 1 }, { unique: true });
 
 /**
  * TODO: Add search for all tutors/types/etc.

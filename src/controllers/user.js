@@ -47,14 +47,14 @@ const postSignup = async (req, res, next) => {
 };
 
 const getUsers = async (req, res, next) => {
-    const users = await User.find({}, (err, docs) => {
+    await User.find({}, (err, docs) => {
         if (err) return next(err);
         return res.send(docs);
     });
 };
 
 const getUserById = async (req, res, next) => {
-    const user = await User.findOne({ _id: req.params.id }, (err, doc) => {
+    await User.findOne({ _id: req.params.id }, (err, doc) => {
         if (err) return next(err);
         return res.send(doc);
     });
