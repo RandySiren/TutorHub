@@ -12,7 +12,14 @@
 
 <body>
     <div id="page">
-        {{>header}}
+        {{>header data}}
+        <br />
+        <div class="container-fluid">
+            {{#each menu}}
+            <a href="{{route}}">{{name}}</a>
+            <br />
+            {{/each}}
+        </div>
     </div>
     {{>footer}}
 

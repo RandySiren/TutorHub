@@ -19,7 +19,7 @@ router.get('/signup', userController.getSignup);
 router.post('/signup', userController.postSignup);
 
 // Post Logged in Routing (everything beyond this point needs to be authenticated)
-router.all('*', auth.isAuthenticated);
+// router.all('*', auth.isAuthenticated);
 /**
  * Homepage Routing
  */
