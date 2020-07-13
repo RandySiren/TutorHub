@@ -3,8 +3,10 @@ const chalk = require('chalk');
 const { User } = require('../models/User');
 const { Course } = require('../models/Course');
 
+const data = require('../routes/data').links;
+
 const getCourseHome = (req, res) => {
-    return res.render('course', { title: 'Course' });
+    return res.render('course', data);
 };
 
 const postCourse = async (req, res, next) => {

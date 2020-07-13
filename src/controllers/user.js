@@ -2,10 +2,11 @@ const passport = require('passport');
 const chalk = require('chalk');
 
 const { User } = require('../models/User');
+const data = require('../routes/data').links;
 
 const getLogin = (req, res) => {
     if (req.user) return res.redirect('/');
-    return res.render('login', { title: 'Login' });
+    return res.render('login', data);
 };
 
 const postLogin = (req, res, next) => {
@@ -25,7 +26,7 @@ const postLogin = (req, res, next) => {
 
 const getSignup = (req, res) => {
     if (req.user) return res.redirect('/');
-    return res.render('signup', { title: 'Signup' });
+    return res.render('signup', data);
 };
 
 const postSignup = async (req, res, next) => {
