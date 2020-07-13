@@ -33,26 +33,38 @@ const postSignup = async (req, res, next) => {
         email: req.body.email,
         password: req.body.password,
     });
-    try {
-        await user.save();
+    await user.save((err, doc) => {
+        if (err) {
+            if (err.code === 11000) {
+                console.error(chalk.red('Email in use')); // TODO: Replace with flash message
+                return res.status(400).redirect('signup');
+            }
+            return next(err);
+        }
         console.log('Successfully registered!'); // TODO: Delete later
         return res.status(201).redirect('login');
-    } catch (err) {
-        if (err.code === 11000) {
-            console.error(chalk.red('Email in use')); // TODO: Replace with flash message
-            return res.status(400).redirect('signup');
-        }
-        return next(err);
-    }
+    });
 };
 
 const getUsers = async (req, res, next) => {
-    try {
-        const users = await User.find({});
-        return res.send(users);
-    } catch (err) {
-        return next(err);
-    }
+    const users = await User.find({}, (err, docs) => {
+        if (err) return next(err);
+        return res.send(docs);
+    });
 };
 
-module.exports = { getLogin, postLogin, getSignup, postSignup, getUsers };
+const getUserById = async (req, res, next) => {
+    const user = await User.findOne({ _id: req.params.id }, (err, doc) => {
+        if (err) return next(err);
+        return res.send(doc);
+    });
+};
+
+module.exports = {
+    getLogin,
+    postLogin,
+    getSignup,
+    postSignup,
+    getUsers,
+    getUserById,
+};

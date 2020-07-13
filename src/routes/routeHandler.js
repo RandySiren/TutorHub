@@ -28,5 +28,6 @@ router.get('/', homeController.getHome);
  * User Endpoints
  */
 router.get('/api/users', userController.getUsers);
+router.get('/api/users/:id', userController.getUserById);
 
 module.exports = router;
