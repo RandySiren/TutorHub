@@ -18,7 +18,21 @@ const userSchema = new Schema({
         required: true,
         trim: true,
     },
-    courses: Array,
+    name: {
+        type: String,
+        required: true,
+        trim: true,
+    },
+    courses: {
+        type: Array,
+        default: [],
+    },
+    clearance: {
+        type: Number,
+        default: 1,
+        min: 1,
+        max: 3,
+    },
 });
 
 /**

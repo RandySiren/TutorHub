@@ -34,6 +34,9 @@ const postSignup = async (req, res, next) => {
     const user = new User({
         email: req.body.email,
         password: req.body.password,
+        clearance: 1,
+        courses: [],
+        name: req.body.name,
     });
     await user.save((err, doc) => {
         if (err) {
@@ -63,7 +66,7 @@ const getUsers = async (req, res, next) => {
 };
 
 const getUserById = async (req, res, next) => {
-    await User.findOne({ _id: req.params.id }, (err, doc) => {
+    await User.findOneById(req.params.id, (err, doc) => {
         if (err) return next(err);
         return res.send(doc);
     });
@@ -80,7 +83,6 @@ const getUserCourses = async (req, res, next) => {
         );
     });
 };
-
 module.exports = {
     getLogin,
     postLogin,
