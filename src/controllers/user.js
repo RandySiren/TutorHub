@@ -47,6 +47,13 @@ const postSignup = async (req, res, next) => {
     });
 };
 
+const getCurrentUserData = async (req, res, next) => {
+    if (req.user === undefined) {
+        return res.send({});
+    }
+    return res.send(req.user);
+};
+
 const getUsers = async (req, res, next) => {
     await User.find({}, (err, docs) => {
         if (err) return next(err);
@@ -61,11 +68,20 @@ const getUserById = async (req, res, next) => {
     });
 };
 
+const getUserCourses = async (req, res, next) => {
+    await User.findOne({ _id: req.user._id }, (err, doc) => {
+        if (err) return next(err);
+        return res.send(doc.courses);
+    });
+};
+
 module.exports = {
     getLogin,
     postLogin,
     getSignup,
     postSignup,
+    getCurrentUserData,
     getUsers,
     getUserById,
+    getUserCourses,
 };

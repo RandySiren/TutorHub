@@ -1,6 +1,15 @@
 document.addEventListener('DOMContentLoaded', async function () {
+    let parentDiv = document.querySelector('#courseAddDIV');
+    if (parentDiv !== null) {
+        createCourseAdd(parentDiv);
+    } else {
+        parentDiv = document.querySelector('#courseViewDIV');
+        createCourseView(parentDiv);
+    }
+});
+
+async function createCourseAdd(parentDiv) {
     const allCourses = await getAllCourses();
-    const parentDiv = document.querySelector('#courses');
     allCourses.forEach((courseData) => {
         /* Add an element for each course onto to page */
         const elementDiv = document.createElement('div');
@@ -20,7 +29,14 @@ document.addEventListener('DOMContentLoaded', async function () {
         elementDiv.appendChild(elementText);
         elementDiv.appendChild(elementButton);
     });
-});
+}
+
+async function createCourseView(parentDiv) {
+    const userCourses = await getUserCourses();
+    userCourses.forEach((courseId) => {
+        console.log(courseId);
+    });
+}
 
 async function getAllCourses() {
     try {
@@ -33,11 +49,20 @@ async function getAllCourses() {
 
 async function addCourse(courseId) {
     try {
-        const success = await fetch(`/api/courses/add/${courseId}`, {
+        const response = await fetch(`/api/courses/add/${courseId}`, {
             method: 'POST',
         });
-        const blob = await success.json();
+        const blob = await response.json();
         return blob.message === 'Added';
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+async function getUserCourses() {
+    try {
+        const user = await (await fetch(`/users/me`)).json();
+        return user.courses;
     } catch (err) {
         console.log(err);
     }

@@ -41,5 +41,6 @@ router.post('/api/courses/add/:id', courseController.addCourseUser);
  */
 router.get('/api/users', userController.getUsers);
 router.get('/api/users/:id', userController.getUserById);
+router.get('/users/me', userController.getCurrentUserData);
 
 module.exports = router;
