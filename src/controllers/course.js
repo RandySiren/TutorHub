@@ -34,7 +34,6 @@ const postCourse = async (req, res, next) => {
             return next(err);
         }
         console.log('Successfully added!');
-        console.log(doc);
         return res.status(201).redirect('../../courses');
     });
 };
@@ -46,10 +45,34 @@ const getCourses = async (req, res, next) => {
     });
 };
 
+const getCourseById = async (req, res, next) => {
+    await Course.findOne({ _id: req.params.id }, (err, doc) => {
+        if (err) return next(err);
+        return res.send(doc);
+    });
+};
+
+const addCourseUser = async (req, res, next) => {
+    await User.findById(req.user._id, (err, doc) => {
+        const courseId = req.params.id;
+        if (err) return next(err);
+        if (!doc.courses.includes(courseId)) {
+            doc.courses.push(courseId);
+            doc.save((err, doc) => {
+                if (err) return next(err);
+            });
+            return res.send({ message: 'Added' });
+        }
+        return res.send({ message: 'Not added' });
+    });
+};
+
 module.exports = {
     getCoursesHome,
     getCoursesAdd,
     getCoursesView,
     postCourse,
     getCourses,
+    getCourseById,
+    addCourseUser,
 };

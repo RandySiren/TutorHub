@@ -9,7 +9,8 @@
         "consistent-return": "off",
         "no-shadow": "off",
         "func-names": "off",
-        "no-use-before-define": "off"
+        "no-use-before-define": "off",
+        "no-underscore-dangle": "off"
     },
     "plugins": ["prettier"],
     "env": {

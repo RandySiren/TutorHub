@@ -32,7 +32,9 @@ router.get('/courses', courseController.getCoursesHome);
 router.get('/courses/add', courseController.getCoursesAdd);
 router.get('/courses/view', courseController.getCoursesView);
 router.get('/api/courses', courseController.getCourses);
+router.get('/api/courses/:id', courseController.getCourseById);
 router.post('/api/courses/add', courseController.postCourse);
+router.post('/api/courses/add/:id', courseController.addCourseUser);
 
 /**
  * User Routing

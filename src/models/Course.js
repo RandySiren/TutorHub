@@ -26,11 +26,7 @@ const courseSchema = new Schema({
     subject: {
         type: String,
     },
-    tutors: [
-        {
-            id: String,
-        },
-    ],
+    tutors: Array,
 });
 
 courseSchema.index({ courseId: 1, school: 1 }, { unique: true });
