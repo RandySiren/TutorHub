@@ -46,7 +46,7 @@ const getCourses = async (req, res, next) => {
 };
 
 const getCourseById = async (req, res, next) => {
-    await Course.findOne({ _id: req.params.id }, (err, doc) => {
+    await Course.findById(req.params.id, (err, doc) => {
         if (err) return next(err);
         return res.send(doc);
     });
