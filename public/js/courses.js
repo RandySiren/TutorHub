@@ -34,17 +34,14 @@ async function createCourseAdd(parentDiv) {
 
 async function createCourseView(parentDiv) {
     const userCourses = await getUserCourses();
-
-    // eslint-disable-next-line no-restricted-syntax
-    for (const course of userCourses) {
-        console.log(course);
+    userCourses.map(async (course) => {
         const elementDiv = document.createElement('div');
         parentDiv.appendChild(elementDiv);
         const elementText = document.createElement('p');
         elementText.innerHTML = `${course.courseId} - ${course.name}`;
         const elementButton = document.createElement('button');
         elementButton.innerHTML = 'Add Course';
-        elementButton.addEventListener('click', async (e) => {
+        elementButton.addEventListener('click', async () => {
             const success = await addCourse(course._id);
             if (success) {
                 alert(`Added ${course.courseId}`);
@@ -54,7 +51,7 @@ async function createCourseView(parentDiv) {
         });
         elementDiv.appendChild(elementText);
         elementDiv.appendChild(elementButton);
-    }
+    });
 }
 
 async function getAllCourses() {
@@ -81,14 +78,9 @@ async function addCourse(courseId) {
 async function getUserCourses() {
     try {
         const user = await (await fetch(`/users/me`)).json();
-        const courseData = [];
-        // eslint-disable-next-line no-restricted-syntax
-        for (const courseRawId of user.courses) {
-            // eslint-disable-next-line no-await-in-loop
-            const data = await // eslint-disable-next-line no-await-in-loop
-            (await fetch(`/api/courses/${courseRawId}`)).json();
-            courseData.push(data);
-        }
+        const courseData = await (
+            await fetch(`/api/users/${user._id}/courses`)
+        ).json();
         return courseData;
     } catch (err) {
         console.log(err);

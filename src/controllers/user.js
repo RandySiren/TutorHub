@@ -2,6 +2,7 @@ const passport = require('passport');
 const chalk = require('chalk');
 
 const { User } = require('../models/User');
+const { Course } = require('../models/Course');
 const data = require('../routes/data').links;
 
 const getLogin = (req, res) => {
@@ -69,9 +70,14 @@ const getUserById = async (req, res, next) => {
 };
 
 const getUserCourses = async (req, res, next) => {
-    await User.findOne({ _id: req.user._id }, (err, doc) => {
-        if (err) return next(err);
-        return res.send(doc.courses);
+    await User.findById(req.params.id, async (err, doc) => {
+        return res.send(
+            await Promise.all(
+                doc.courses.map((courseRawId) =>
+                    Course.findById(courseRawId, (err, doc) => doc)
+                )
+            )
+        );
     });
 };
 
