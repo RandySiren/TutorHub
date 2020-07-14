@@ -6,8 +6,76 @@ Brandon, Tim, Joe, Mandeep, Jordan
 Students: 20
 Simon, Adam, John, Bob, Steve, Alex, Luke, Cameron, James, Cole, Kyle, Liam, Craig, Zack, Daniel, Owen, Robert, Eric, Brian, Jason
 
-Insitutions: 1
-Wilfrid Laurier University
-
 Courses: 12
-CP102, CP104, CP164, CP212, CP213, CP216, CP220, CP264, CP312, CP317, CP363, CP386
+--
+CP102
+Information Processing with Microcomputer Systems
+Computer Science
+Wilfrid Laurier University
+1
+--
+CP104
+Introduction to Programming	
+Computer Science
+Wilfrid Laurier University
+1
+--
+CP164
+Data Structures I
+Computer Science
+Wilfrid Laurier University
+1
+--
+CP212
+Windows Application Programming	
+Computer Science
+Wilfrid Laurier University
+2
+--
+CP213
+Introduction to Object-Oriented Programming
+Computer Science
+Wilfrid Laurier University
+2
+--
+CP216
+Introduction to Microprocessors
+Computer Science
+Wilfrid Laurier University
+2
+--
+CP220
+Digital Electronics
+Computer Science
+Wilfrid Laurier University
+2
+--
+CP264
+Data Structures II
+Computer Science
+Wilfrid Laurier University
+2
+--
+CP312
+Algorithm Design and Analysis I
+Computer Science
+Wilfrid Laurier University
+3
+--
+CP317
+Software Engineering
+Computer Science
+Wilfrid Laurier University
+3
+--
+CP363
+Database I
+Computer Science
+Wilfrid Laurier University
+3
+--
+CP386
+Operating Systems
+Computer Science
+Wilfrid Laurier University
+3
