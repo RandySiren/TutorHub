@@ -7,20 +7,28 @@ http://creativecommons.org/licenses/by/3.0/
 /*----------------------------------------------
     COMMON  STYLES    
 ------------------------------------------------*/
+html,
 body {
     font-family: 'Ubuntu', sans-serif;
     background: #ff9801 url(../img/bg-img.jpg) !important;
+    height: 100%;
 }
 
 #wrapper {
+    height: 100%;
     width: 100%;
 }
 
 #page-wrapper {
     padding: 15px 15px;
     min-height: 600px;
+    height: calc(100%-55px);
+    height: -webkit-calc(100% - 40px);
+    height: -moz-calc(100% - 40px);
+    height: calc(100% - 40px);
     background: #e6e6e6;
 }
+
 #page-inner {
     width: 100%;
     margin: 10px 20px 10px 0px;
@@ -389,6 +397,8 @@ p {
     margin-left: 20px;
 }
 footer p {
+    position: absolute;
+    bottom: 0;
     font-size: 14px;
 }
 /*----------------------------------------------
@@ -609,7 +619,9 @@ ul.dropdown-menu.dropdown-messages li a div {
     #page-wrapper {
         margin: 0 0 0 260px;
         padding: 15px 30px;
-        min-height: 95vh;
+        height: -webkit-calc(100% - 55px);
+        height: -moz-calc(100% - 55px);
+        height: calc(100% - 55px);
     }
 
     .navbar-side {
