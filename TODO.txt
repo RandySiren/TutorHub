@@ -1,0 +1,6 @@
+Design Home Page
+
+Manage Tutors Page
+    - Search bar and display a list of tutors
+Manage Courses Page
+

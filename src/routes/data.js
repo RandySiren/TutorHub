@@ -10,7 +10,7 @@ exports.links = {
         },
         {
             route: '/',
-            name: 'Home',
+            name: 'Dashboard',
         },
         {
             route: '/courses',
@@ -39,4 +39,5 @@ exports.links = {
             name: 'View My Tutors',
         },
     ],
+    showFullNavbar: true,
 };

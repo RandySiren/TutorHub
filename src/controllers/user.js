@@ -7,7 +7,7 @@ const data = require('../routes/data').links;
 
 const getLogin = (req, res) => {
     if (req.user) return res.redirect('/');
-    return res.render('login', data);
+    return res.render('login', { ...data, showFullNavbar: true });
 };
 
 const postLogin = (req, res, next) => {
@@ -25,9 +25,18 @@ const postLogin = (req, res, next) => {
     })(req, res, next);
 };
 
+const postLogout = (req, res, next) => {
+    req.logout();
+    req.session.destroy((err) => {
+        if (err) return next(err);
+        req.user = null;
+        res.redirect('/');
+    });
+};
+
 const getSignup = (req, res) => {
     if (req.user) return res.redirect('/');
-    return res.render('signup', data);
+    return res.render('signup', { ...data, showFullNavbar: false });
 };
 
 const postSignup = async (req, res, next) => {
@@ -86,6 +95,7 @@ const getUserCourses = async (req, res, next) => {
 module.exports = {
     getLogin,
     postLogin,
+    postLogout,
     getSignup,
     postSignup,
     getCurrentUserData,
