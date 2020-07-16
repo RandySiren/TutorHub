@@ -12,13 +12,23 @@ const getCoursesHome = (req, res) => {
 
 const getCoursesAdd = (req, res) => {
     const mutatedData = { ...data };
+    if (req.user.clearance === 2) {
+        mutatedData.showTutor = true;
+    } else {
+        mutatedData.showAdmin = true;
+        mutatedData.showTutor = true;
+    }
     return res.render('courseAdd', mutatedData);
 };
 
 const getCoursesView = (req, res) => {
-    const mutatedData = {
-        ...data,
-    };
+    const mutatedData = { ...data };
+    if (req.user.clearance === 2) {
+        mutatedData.showTutor = true;
+    } else {
+        mutatedData.showAdmin = true;
+        mutatedData.showTutor = true;
+    }
     return res.render('courseView', mutatedData);
 };
 

@@ -6,6 +6,7 @@ const userController = require('../controllers/user');
 const homeController = require('../controllers/home');
 const courseController = require('../controllers/course');
 const tutorController = require('../controllers/tutors');
+const adminController = require('../controllers/admin');
 
 /**
  * Login Routing
@@ -22,6 +23,7 @@ router.post('/signup', userController.postSignup);
 
 // Post Logged in Routing (everything beyond this point needs to be authenticated)
 router.all('*', auth.isAuthenticated);
+router.all('/admin/*', auth.isAdmin);
 /**
  * Homepage Routing
  */
@@ -51,8 +53,14 @@ router.get('/users/me', userController.getCurrentUserData);
  */
 router.get('/tutors/add', tutorController.getTutorsAdd);
 router.get('/tutors/view', tutorController.getTutorsView);
+router.get('/tutors/panel', tutorController.getTutorsPanel);
 router.get('/becomeatutor', tutorController.postTutor); // Change this to post later
 router.get('/api/tutors', tutorController.getTutors);
 router.get('/api/tutors/:id', tutorController.getTutorsById);
+
+/**
+ * Admin Routing
+ */
+router.get('/admin/panel', adminController.getAdminHome);
 
 module.exports = router;

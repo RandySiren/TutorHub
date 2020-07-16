@@ -5,11 +5,36 @@ const { Course } = require('../models/Course');
 const data = require('../routes/data').links;
 
 const getTutorsAdd = (req, res) => {
-    return res.render('tutorAdd', data);
+    const mutatedData = { ...data };
+    if (req.user.clearance === 2) {
+        mutatedData.showTutor = true;
+    } else {
+        mutatedData.showAdmin = true;
+        mutatedData.showTutor = true;
+    }
+    return res.render('tutorAdd', mutatedData);
 };
 
 const getTutorsView = (req, res) => {
-    return res.render('tutorView', data);
+    const mutatedData = { ...data };
+    if (req.user.clearance === 2) {
+        mutatedData.showTutor = true;
+    } else {
+        mutatedData.showAdmin = true;
+        mutatedData.showTutor = true;
+    }
+    return res.render('tutorView', mutatedData);
+};
+
+const getTutorsPanel = (req, res) => {
+    const mutatedData = { ...data };
+    if (req.user.clearance === 2) {
+        mutatedData.showTutor = true;
+    } else {
+        mutatedData.showAdmin = true;
+        mutatedData.showTutor = true;
+    }
+    return res.render('tutor', mutatedData);
 };
 const postTutor = async (req, res, next) => {
     await User.findById(req.user._id, (err, doc) => {
@@ -42,6 +67,7 @@ const getTutorsById = async (req, res, next) => {
 module.exports = {
     getTutorsAdd,
     getTutorsView,
+    getTutorsPanel,
     postTutor,
     getTutors,
     getTutorsById,

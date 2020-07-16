@@ -4,9 +4,19 @@
             {{#if showFullSidebar}}
             {{#each fullSidebarData}}
             <li>
-                <a href="{{route}}"><i class="fa {{icon}}"></i> {{name}}</a>
+                <a href="{{route}}"><i class="fas {{icon}}"></i> {{name}}</a>
             </li>
             {{/each}}
+            {{#if showTutor}}
+            <li>
+                <a href="/tutors/panel"><i class="fas fa-user-cog"></i> Tutor Panel</a>
+            </li>
+            {{/if}}
+            {{#if showAdmin}}
+            <li>
+                <a href="/admin/panel"><i class="fas fa-user-cog"></i> Admin Panel</a>
+            </li>
+            {{/if}}
             {{else}}
             <li>
                 <a href="/home"><i class="fas fa-sign-in-alt"></i> Log In</a>
