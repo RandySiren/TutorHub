@@ -6,15 +6,20 @@ const { Course } = require('../models/Course');
 const data = require('../routes/data').links;
 
 const getCoursesHome = (req, res) => {
-    return res.render('course', data);
+    const mutatedData = { ...data };
+    return res.render('course', mutatedData);
 };
 
 const getCoursesAdd = (req, res) => {
-    return res.render('courseAdd', data);
+    const mutatedData = { ...data };
+    return res.render('courseAdd', mutatedData);
 };
 
 const getCoursesView = (req, res) => {
-    return res.render('courseView', data);
+    const mutatedData = {
+        ...data,
+    };
+    return res.render('courseView', mutatedData);
 };
 
 const postCourse = async (req, res, next) => {

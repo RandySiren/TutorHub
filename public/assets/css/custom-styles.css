@@ -121,6 +121,7 @@ p {
     -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
 }
+
 .dropdown-menu > li > a {
     display: block;
     padding: 3px 20px;
@@ -425,7 +426,7 @@ footer p {
     font-weight: 700;
     text-transform: uppercase;
     line-height: 30px;
-    background: #3a3124;
+    background: #333;
 }
 .navbar-brand b {
     color: #ff9801;
@@ -446,8 +447,8 @@ footer p {
 .top-navbar .nav > li > a:hover,
 .top-navbar .nav > li > a:focus {
     text-decoration: none;
-    color: #ff9801 !important;
-    background: transparent;
+    color: #ffffff !important;
+    background: #ff9801;
 }
 .top-navbar .dropdown-menu {
     min-width: 230px;
@@ -523,6 +524,11 @@ footer p {
 .sidebar-collapse > .nav > li > a {
     padding: 12px 10px;
 }
+
+.sidebar-collapse > .nav > li:first-child {
+    border-top: 1px solid rgba(107, 108, 109, 0.19);
+}
+
 .sidebar-collapse > .nav > li {
     border-bottom: 1px solid rgba(107, 108, 109, 0.19);
 }
@@ -539,7 +545,7 @@ ul.nav.nav-second-level.collapse.in {
     background: #ff9801 url(../img/bg-img.jpg) !important;
 }
 .top-navbar {
-    background: #4a4a4a;
+    background: #333;
     border-bottom: none;
 }
 .top-navbar .nav > li > a > i {
@@ -557,7 +563,7 @@ ul.nav.nav-second-level.collapse.in {
     border: 0px solid black;
 }
 .navbar-header {
-    background: transparent;
+    background: red;
 }
 .navbar-default .navbar-toggle:hover,
 .navbar-default .navbar-toggle:focus {

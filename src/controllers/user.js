@@ -7,7 +7,10 @@ const data = require('../routes/data').links;
 
 const getLogin = (req, res) => {
     if (req.user) return res.redirect('/');
-    return res.render('login', { ...data, showFullNavbar: true });
+    const mutatedData = { ...data };
+    mutatedData.showFullNavbar = false;
+    mutatedData.showFullSidebar = false;
+    return res.render('login', mutatedData);
 };
 
 const postLogin = (req, res, next) => {
@@ -25,7 +28,7 @@ const postLogin = (req, res, next) => {
     })(req, res, next);
 };
 
-const postLogout = (req, res, next) => {
+const getLogout = (req, res, next) => {
     req.logout();
     req.session.destroy((err) => {
         if (err) return next(err);
@@ -36,7 +39,10 @@ const postLogout = (req, res, next) => {
 
 const getSignup = (req, res) => {
     if (req.user) return res.redirect('/');
-    return res.render('signup', { ...data, showFullNavbar: false });
+    const mutatedData = { ...data };
+    mutatedData.showFullNavbar = false;
+    mutatedData.showFullSidebar = false;
+    return res.render('signup', mutatedData);
 };
 
 const postSignup = async (req, res, next) => {
@@ -95,7 +101,7 @@ const getUserCourses = async (req, res, next) => {
 module.exports = {
     getLogin,
     postLogin,
-    postLogout,
+    getLogout,
     getSignup,
     postSignup,
     getCurrentUserData,

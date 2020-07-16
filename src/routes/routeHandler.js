@@ -12,7 +12,7 @@ const tutorController = require('../controllers/tutors');
  */
 router.get('/login', userController.getLogin);
 router.post('/login', userController.postLogin);
-router.post('/logout', userController.postLogout);
+router.get('/logout', userController.getLogout);
 
 /**
  * Signup Routing
