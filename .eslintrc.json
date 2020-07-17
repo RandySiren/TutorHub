@@ -8,7 +8,10 @@
         "prettier/prettier": ["error"],
         "consistent-return": "off",
         "no-shadow": "off",
-        "func-names": "off"
+        "func-names": "off",
+        "no-use-before-define": "off",
+        "no-underscore-dangle": "off",
+        "no-param-reassign": "off"
     },
     "plugins": ["prettier"],
     "env": {

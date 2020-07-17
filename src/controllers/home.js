@@ -1,5 +1,16 @@
+const data = require('../routes/data').links;
+/**
+ * Render home page/dashboard for logged in user
+ */
 const getHome = (req, res) => {
-    res.render('home');
+    const mutatedData = { ...data };
+    if (req.user.clearance === 2) {
+        mutatedData.showTutor = true;
+    } else {
+        mutatedData.showAdmin = true;
+        mutatedData.showTutor = true;
+    }
+    res.render('home', mutatedData);
 };
 
 module.exports = { getHome };

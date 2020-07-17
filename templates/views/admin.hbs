@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TutorHub - Admin Panel</title>
+    <!-- Bootstrap Styles-->
+    <link href="../assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- FontAwesome Styles-->
+    <link href="../assets/css/all.min.css" rel="stylesheet" />
+    <!-- Custom Styles-->
+    <link href="../assets/css/custom-styles.css" rel="stylesheet" />
+    <!-- Google Fonts-->
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css' />
+    <!-- Non Templated Styles -->
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+
+<body>
+    <div id="wrapper">
+        {{>navbar}}
+        {{>navbarside}}
+        <div id="page-wrapper">
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="page-header">
+                            Admin Panel
+                        </h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a href="#home" data-toggle="tab">Home</a>
+                                </li>
+                                <li class=""><a href="#profile" data-toggle="tab">Profile</a>
+                                </li>
+                                <li class=""><a href="#messages" data-toggle="tab">Messages</a>
+                                </li>
+                                <li class=""><a href="#settings" data-toggle="tab">Settings</a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content">
+                                <div class="tab-pane fade active in" id="home">
+                                    <h4>Tab 1</h4>
+                                    <p>Tab 1 Stuff</p>
+                                </div>
+                                <div class="tab-pane fade" id="profile">
+                                    <h4>Tab 2</h4>
+                                    <p>Tab 2 Stuff</p>
+                                </div>
+                                <div class="tab-pane fade" id="messages">
+                                    <h4>Tab 3</h4>
+                                    <p>Tab 3 Stuff</p>
+                                </div>
+                                <div class="tab-pane fade" id="settings">
+                                    <h4>Tab 4</h4>
+                                    <p>Tab 4 Stuff</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{>footer}}
+        </div>
+        <!-- /. PAGE INNER  -->
+    </div>
+    <!-- /. PAGE WRAPPER  -->
+    </div>
+    <!-- /. WRAPPER  -->
+
+    <!-- JS Scripts-->
+    <script src="../js/main.js"></script>
+    <!-- jQuery Js -->
+    <script src="../assets/js/jquery-1.10.2.js"></script>
+    <!-- Bootstrap Js -->
+    <script src="../assets/js/bootstrap.min.js"></script>
+    <!-- Metis Menu Js -->
+    <script src="../assets/js/jquery.metismenu.js"></script>
+    <!-- Custom Js -->
+    <script src="../assets/js/custom-scripts.js"></script>
+</body>
+
+</html>

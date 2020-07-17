@@ -46,3 +46,15 @@ exports.isAuthenticated = (req, res, next) => {
     if (req.isAuthenticated()) return next();
     res.redirect('/login');
 };
+
+/* Checks if user is a tutor */
+exports.isTUtor = (req, res, next) => {
+    if (req.user.clearance >= 2) return next();
+    res.redirect('/');
+};
+
+/* Checks if user is an admin */
+exports.isAdmin = (req, res, next) => {
+    if (req.user.clearance === 3) return next();
+    res.redirect('/');
+};

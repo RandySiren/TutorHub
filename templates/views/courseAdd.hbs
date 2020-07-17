@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TutorHub</title>
+    <!-- Bootstrap Styles-->
+    <link href="../assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- FontAwesome Styles-->
+    <link href="../assets/css/all.min.css" rel="stylesheet" />
+    <!-- Custom Styles-->
+    <link href="../assets/css/custom-styles.css" rel="stylesheet" />
+    <!-- Google Fonts-->
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css' />
+    <!-- Non Templated Styles -->
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+
+<body>
+    <div id="wrapper">
+        {{>navbar}}
+        {{>navbarside}}
+        <div id="page-wrapper">
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="page-header">
+                            Add a Course
+                        </h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <form role="form">
+                        <div class="form-group input-group">
+                            <input type="text" class="form-control" placeholder="Search for a course">
+                            <span class="input-group-btn">
+                                <button id="search-button" class="btn btn-default" type="button"><i
+                                        class="fas fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+                <div id="courseAddDIV" class="container-fluid">
+
+                    <!-- /. ROW  -->
+
+                </div>
+            </div>
+            {{>footer}}
+            <!-- /. PAGE INNER  -->
+        </div>
+        <!-- /. PAGE WRAPPER  -->
+    </div>
+    <!-- /. WRAPPER  -->
+
+    <!-- JS Scripts-->
+    <script src="../js/main.js"></script>
+    <script src="../js/courses.js"></script>
+    <!-- jQuery Js -->
+    <script src="../assets/js/jquery-1.10.2.js"></script>
+    <!-- Bootstrap Js -->
+    <script src="../assets/js/bootstrap.min.js"></script>
+    <!-- Metis Menu Js -->
+    <script src="../assets/js/jquery.metismenu.js"></script>
+    <!-- Custom Js -->
+    <script src="../assets/js/custom-scripts.js"></script>
+
+</body>
+
+</html>

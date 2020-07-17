@@ -2,9 +2,15 @@ const passport = require('passport');
 const chalk = require('chalk');
 
 const { User } = require('../models/User');
+const { Course } = require('../models/Course');
+const data = require('../routes/data').links;
 
 const getLogin = (req, res) => {
-    res.render('login', { title: 'Login' });
+    if (req.user) return res.redirect('/');
+    const mutatedData = { ...data };
+    mutatedData.showFullNavbar = false;
+    mutatedData.showFullSidebar = false;
+    return res.render('login', mutatedData);
 };
 
 const postLogin = (req, res, next) => {
@@ -17,31 +23,89 @@ const postLogin = (req, res, next) => {
         req.logIn(user, (err) => {
             if (err) return next(err);
             console.log(chalk.green('LOGGED IN'));
-            res.redirect('/');
+            return res.redirect('/');
         });
     })(req, res, next);
 };
 
+const getLogout = (req, res, next) => {
+    req.logout();
+    req.session.destroy((err) => {
+        if (err) return next(err);
+        req.user = null;
+        res.redirect('/');
+    });
+};
+
 const getSignup = (req, res) => {
-    res.render('signup', { title: 'Signup' });
+    if (req.user) return res.redirect('/');
+    const mutatedData = { ...data };
+    mutatedData.showFullNavbar = false;
+    mutatedData.showFullSidebar = false;
+    return res.render('signup', mutatedData);
 };
 
 const postSignup = async (req, res, next) => {
     const user = new User({
         email: req.body.email,
         password: req.body.password,
+        clearance: 1,
+        courses: [],
+        name: req.body.name,
     });
-    try {
-        await user.save();
+    await user.save((err, doc) => {
+        if (err) {
+            if (err.code === 11000) {
+                console.error(chalk.red('Email in use')); // TODO: Replace with flash message
+                return res.status(400).redirect('signup');
+            }
+            return next(err);
+        }
         console.log('Successfully registered!'); // TODO: Delete later
         return res.status(201).redirect('login');
-    } catch (err) {
-        if (err.code === 11000) {
-            console.error(chalk.red('Email in use')); // TODO: Replace with flash message
-            return res.status(400).redirect('signup');
-        }
-        return next(err);
-    }
+    });
 };
 
-module.exports = { getLogin, postLogin, getSignup, postSignup };
+const getCurrentUserData = async (req, res, next) => {
+    if (req.user === undefined) {
+        return res.send({});
+    }
+    return res.send(req.user);
+};
+
+const getUsers = async (req, res, next) => {
+    await User.find({}, (err, docs) => {
+        if (err) return next(err);
+        return res.send(docs);
+    });
+};
+
+const getUserById = async (req, res, next) => {
+    await User.findOneById(req.params.id, (err, doc) => {
+        if (err) return next(err);
+        return res.send(doc);
+    });
+};
+
+const getUserCourses = async (req, res, next) => {
+    await User.findById(req.params.id, async (err, doc) => {
+        return res.send(
+            await Promise.all(
+                doc.courses.map((courseRawId) =>
+                    Course.findById(courseRawId, (err, doc) => doc)
+                )
+            )
+        );
+    });
+};
+module.exports = {
+    getLogin,
+    postLogin,
+    getLogout,
+    getSignup,
+    postSignup,
+    getCurrentUserData,
+    getUsers,
+    getUserById,
+    getUserCourses,
+};
