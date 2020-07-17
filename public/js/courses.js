@@ -22,46 +22,45 @@ async function createCourseAdd(parentDiv) {
                         <div class="col-md-4 col-sm-4">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    ${courseData.courseId}<br> ${courseData.name}
+                                    ${courseData.courseId}<br /> <i>${courseData.name}</i>
                                 </div>
                                 <div class="panel-footer">
                                     <button class="btn btn-warning" data-toggle="modal" data-target="#myModal${index}">
                                         View Course
                                     </button>
                                     <div class="modal fade" id="myModal${index}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                            <h4 class="modal-title" id="myModalLabel">${courseData.name}</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <table>
-                                                <tr>
-                                                    <td style="padding:5px"><strong>Course ID:</strong></td>
-                                                    <td style="padding:5px">${courseData.courseId}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="padding:5px"><strong>Course Name:</strong></td>
-                                                    <td style="padding:5px">${courseData.name}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="padding:5px"><strong>Institution:</strong></td>
-                                                    <td style="padding:5px">${courseData.school}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="padding:5px"><strong>Year:</strong></td>
-                                                    <td style="padding:5px">${courseData.level}</td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-warning">Add Course</button>
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                    <h4 class="modal-title" id="myModalLabel">${courseData.name}</h4>
+                                                </div>
+                                            <div class="modal-body">
+                                                <table>
+                                                    <tr>
+                                                        <td style="padding:5px"><strong>Course ID:</strong></td>
+                                                        <td style="padding:5px">${courseData.courseId}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="padding:5px"><strong>Course Name:</strong></td>
+                                                        <td style="padding:5px">${courseData.name}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="padding:5px"><strong>Institution:</strong></td>
+                                                        <td style="padding:5px">${courseData.school}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="padding:5px"><strong>Year:</strong></td>
+                                                        <td style="padding:5px">${courseData.level}</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-warning">Add Course</button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
                                 </div>
                             </div>
                         </div>
