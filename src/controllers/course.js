@@ -82,6 +82,22 @@ const addCourseUser = async (req, res, next) => {
     });
 };
 
+const removeCourseUser = async (req, res, next) => {
+    await User.findById(req.user._id, (err, doc) => {
+        const courseId = req.params.id;
+        if (err) return next(err);
+        if (doc.courses.includes(courseId)) {
+            const index = doc.courses.indexOf(courseId);
+            doc.courses.splice(index, 1);
+            doc.save((err, doc) => {
+                if (err) return next(err);
+            });
+            return res.send({ message: 'Removed' });
+        }
+        return res.send({ message: 'Not removed' });
+    });
+};
+
 module.exports = {
     getCoursesHome,
     getCoursesAdd,
@@ -90,4 +106,5 @@ module.exports = {
     getCourses,
     getCourseById,
     addCourseUser,
+    removeCourseUser,
 };

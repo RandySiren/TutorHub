@@ -39,6 +39,7 @@ router.get('/api/courses', courseController.getCourses);
 router.get('/api/courses/:id', courseController.getCourseById);
 router.post('/api/courses/add', courseController.postCourse);
 router.post('/api/courses/add/:id', courseController.addCourseUser);
+router.post('/api/courses/remove/:id', courseController.removeCourseUser);
 
 /**
  * User Routing

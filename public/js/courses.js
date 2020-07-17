@@ -4,15 +4,29 @@ document.addEventListener('DOMContentLoaded', async function () {
         createCourseAdd(parentDiv);
     } else {
         parentDiv = document.querySelector('#courseViewDIV');
-        createCourseView(parentDiv);
     }
 });
 
 async function createCourseAdd(parentDiv) {
     const allCourses = await getAllCourses();
+    const userCourses = await getUserCourses();
+    const allCoursesHas = await Promise.all(
+        allCourses.map(async (data, index) => {
+            const hasCourse1 = await hasCourse(data._id, userCourses);
+            const buttonType = {
+                class: 'btn-warning',
+                text: 'Add Course',
+            };
+            if (hasCourse1) {
+                buttonType.class = 'btn-danger';
+                buttonType.text = 'Remove Course';
+            }
+            return buttonType;
+        })
+    );
     const element = document.createElement('div');
 
-    allCourses.forEach((courseData, index) => {
+    await allCourses.map(async (courseData, index) => {
         if (index % 3 === 0) {
             element.innerHTML += `
                 <div class="row">
@@ -56,8 +70,8 @@ async function createCourseAdd(parentDiv) {
                                                 </table>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-warning">Add Course</button>
+                                                <button ty="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn ${allCoursesHas[index].class}" id="add-course-button-${index}">${allCoursesHas[index].text}</button>
                                             </div>
                                         </div>
                                     </div>
@@ -72,47 +86,39 @@ async function createCourseAdd(parentDiv) {
         }
         parentDiv.appendChild(element);
     });
-
-    // allCourses.forEach((courseData) => {
-    //     const elementDiv = document.createElement('div');
-    //     parentDiv.appendChild(elementDiv);
-    //     const elementText = document.createElement('p');
-    //     elementText.innerHTML = `${courseData.courseId} - ${courseData.name}`;
-    //     const elementButton = document.createElement('button');
-    //     elementButton.innerHTML = 'Add Course';
-    //     elementButton.addEventListener('click', async (e) => {
-    //         const success = await addCourse(courseData._id);
-    //         if (success) {
-    //             alert(`Added ${courseData.courseId}`);
-    //         } else {
-    //             alert(`You already have ${courseData.courseId}`);
-    //         }
-    //     });
-    //     elementDiv.appendChild(elementText);
-    //     elementDiv.appendChild(elementButton);
-    // });
+    for (let i = 0; i < allCourses.length; i += 1) {
+        document
+            .querySelector(`#add-course-button-${i}`)
+            .addEventListener('click', async (e) => {
+                if (e.target.innerText === 'Remove Course') {
+                    await updateCourse('remove', allCourses[i]._id);
+                    document.querySelector(
+                        `#add-course-button-${i}`
+                    ).className = 'btn btn-warning';
+                    document.querySelector(
+                        `#add-course-button-${i}`
+                    ).innerText = 'Add Course';
+                } else {
+                    await updateCourse('add', allCourses[i]._id);
+                    document.querySelector(
+                        `#add-course-button-${i}`
+                    ).className = 'btn btn-danger';
+                    document.querySelector(
+                        `#add-course-button-${i}`
+                    ).innerText = 'Remove Course';
+                }
+            });
+    }
 }
 
-async function createCourseView(parentDiv) {
-    const userCourses = await getUserCourses();
-    userCourses.map(async (course) => {
-        const elementDiv = document.createElement('div');
-        parentDiv.appendChild(elementDiv);
-        const elementText = document.createElement('p');
-        elementText.innerHTML = `${course.courseId} - ${course.name}`;
-        const elementButton = document.createElement('button');
-        elementButton.innerHTML = 'Add Course';
-        elementButton.addEventListener('click', async () => {
-            const success = await addCourse(course._id);
-            if (success) {
-                alert(`Added ${course.courseId}`);
-            } else {
-                alert(`You already have ${course.courseId}`);
-            }
-        });
-        elementDiv.appendChild(elementText);
-        elementDiv.appendChild(elementButton);
+async function hasCourse(courseRawId, userCourses) {
+    let hasCourse = false;
+    userCourses.forEach((course) => {
+        if (course._id === courseRawId) {
+            hasCourse = true;
+        }
     });
+    return hasCourse;
 }
 
 async function getAllCourses() {
@@ -124,9 +130,9 @@ async function getAllCourses() {
     }
 }
 
-async function addCourse(courseId) {
+async function updateCourse(method, courseRawId) {
     try {
-        const response = await fetch(`/api/courses/add/${courseId}`, {
+        const response = await fetch(`/api/courses/${method}/${courseRawId}`, {
             method: 'POST',
         });
         const blob = await response.json();
