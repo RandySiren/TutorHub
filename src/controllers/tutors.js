@@ -26,6 +26,25 @@ const getTutorsView = (req, res) => {
     return res.render('tutorView', mutatedData);
 };
 
+const getTutorsViewById = async (req, res, next) => {
+    const mutatedData = { ...data };
+    if (req.user.clearance === 2) {
+        mutatedData.showTutor = true;
+    } else {
+        mutatedData.showAdmin = true;
+        mutatedData.showTutor = true;
+    }
+    await User.findOne(
+        { _id: req.params.id, clearance: 2 },
+        { password: 0 },
+        (err, doc) => {
+            if (err) return next(err);
+            mutatedData.tutor = doc;
+            return res.render('tutorPage', mutatedData);
+        }
+    );
+};
+
 const getTutorsPanel = (req, res) => {
     const mutatedData = { ...data };
     if (req.user.clearance === 2) {
@@ -51,24 +70,41 @@ const postTutor = async (req, res, next) => {
 };
 
 const getTutors = async (req, res, next) => {
-    await User.find({ clearance: 2 }, (err, docs) => {
+    await User.find({ clearance: 2 }, { password: 0 }, (err, docs) => {
         if (err) return next(err);
         return res.send(docs);
     });
 };
 
 const getTutorsById = async (req, res, next) => {
-    await User.findOne({ _id: req.params.id, clearance: 2 }, (err, doc) => {
-        if (err) return next(err);
-        return res.send(doc);
-    });
+    await User.findOne(
+        { _id: req.params.id, clearance: 2 },
+        { password: 0 },
+        (err, doc) => {
+            if (err) return next(err);
+            return res.send(doc);
+        }
+    );
+};
+
+const getTutorsByCourse = async (req, res, next) => {
+    await User.find(
+        { clearance: { $gte: 2 }, courses: req.params.id },
+        { password: 0 },
+        (err, doc) => {
+            if (err) return next(err);
+            return res.send(doc);
+        }
+    );
 };
 
 module.exports = {
     getTutorsAdd,
     getTutorsView,
+    getTutorsViewById,
     getTutorsPanel,
     postTutor,
     getTutors,
     getTutorsById,
+    getTutorsByCourse,
 };

@@ -10,18 +10,27 @@ document.addEventListener('DOMContentLoaded', async function () {
 async function createCourseAdd(parentDiv) {
     const allCourses = await getAllCourses();
     const userCourses = await getUserCourses();
-    const allCoursesHas = await Promise.all(
+    const allCoursesData = await Promise.all(
         allCourses.map(async (data, index) => {
+            const tutorNames = await getTutorNames(data._id);
+            let tutorText = ``;
+            tutorNames.forEach((tutor) => {
+                tutorText += `<a href=/tutors/view/${tutor._id}>${tutor.name}</a><br />`;
+            });
             const hasCourse1 = await hasCourse(data._id, userCourses);
-            const buttonType = {
+            const courseData = {
                 class: 'btn-warning',
                 text: 'Add Course',
+                tutorText,
             };
-            if (hasCourse1) {
-                buttonType.class = 'btn-danger';
-                buttonType.text = 'Remove Course';
+            if (tutorText === ``) {
+                courseData.tutorText = 'None';
             }
-            return buttonType;
+            if (hasCourse1) {
+                courseData.class = 'btn-danger';
+                courseData.text = 'Remove Course';
+            }
+            return courseData;
         })
     );
     const element = document.createElement('div');
@@ -67,11 +76,15 @@ async function createCourseAdd(parentDiv) {
                                                         <td style="padding:5px"><strong>Year:</strong></td>
                                                         <td style="padding:5px">${courseData.level}</td>
                                                     </tr>
+                                                    <tr>
+                                                        <td style="padding:5px"><strong>Tutors:</strong></td>
+                                                        <td style="padding:5px">${allCoursesData[index].tutorText}</td>
+                                                    </tr>
                                                 </table>
                                             </div>
                                             <div class="modal-footer">
                                                 <button ty="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn ${allCoursesHas[index].class}" id="add-course-button-${index}">${allCoursesHas[index].text}</button>
+                                                <button type="button" class="btn ${allCoursesData[index].class}" id="add-course-button-${index}">${allCoursesData[index].text}</button>
                                             </div>
                                         </div>
                                     </div>
@@ -107,6 +120,8 @@ async function createCourseAdd(parentDiv) {
                         `#add-course-button-${i}`
                     ).innerText = 'Remove Course';
                 }
+                // eslint-disable-next-line no-restricted-globals
+                location.reload();
             });
     }
 }
@@ -149,6 +164,17 @@ async function getUserCourses() {
             await fetch(`/api/users/${user._id}/courses`)
         ).json();
         return courseData;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+async function getTutorNames(courseRawId) {
+    try {
+        const data = await (
+            await fetch(`/api/tutors/course/${courseRawId}`)
+        ).json();
+        return data;
     } catch (err) {
         console.log(err);
     }

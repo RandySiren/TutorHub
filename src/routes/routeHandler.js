@@ -24,6 +24,7 @@ router.post('/signup', userController.postSignup);
 // Post Logged in Routing (everything beyond this point needs to be authenticated)
 router.all('*', auth.isAuthenticated);
 router.all('/admin/*', auth.isAdmin);
+router.all('/tutor/*', auth.isTutor);
 /**
  * Homepage Routing
  */
@@ -54,11 +55,13 @@ router.get('/users/me', userController.getCurrentUserData);
  */
 router.get('/tutors/add', tutorController.getTutorsAdd);
 router.get('/tutors/view', tutorController.getTutorsView);
-router.get('/tutors/panel', tutorController.getTutorsPanel);
+router.get('/tutors/view/:id', tutorController.getTutorsViewById);
 router.get('/becomeatutor', tutorController.postTutor); // Change this to post later
 router.get('/api/tutors', tutorController.getTutors);
 router.get('/api/tutors/:id', tutorController.getTutorsById);
+router.get('/api/tutors/course/:id', tutorController.getTutorsByCourse);
 
+router.get('/tutor/panel', tutorController.getTutorsPanel);
 /**
  * Admin Routing
  */
