@@ -4,8 +4,18 @@ document.addEventListener('DOMContentLoaded', async function () {
         createCourseAdd(parentDiv);
     } else {
         parentDiv = document.querySelector('#courseViewDIV');
+        createCourseView(parentDiv);
     }
 });
+
+async function createCourseView(parentDiv) {
+    const userCourses = await getUserCourses();
+    const element = document.createElement('div');
+    await userCourses.map(async (courseData, index) => {
+        element.innerHTML += `
+        `;
+    });
+}
 
 async function createCourseAdd(parentDiv) {
     const allCourses = await getAllCourses();

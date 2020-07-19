@@ -27,7 +27,7 @@ const getTutorsView = (req, res) => {
 };
 
 const getTutorsViewById = async (req, res, next) => {
-    const mutatedData = { ...data };
+    const mutatedData = { ...data, tutor: 'test' };
     if (req.user.clearance === 2) {
         mutatedData.showTutor = true;
     } else {
@@ -35,7 +35,7 @@ const getTutorsViewById = async (req, res, next) => {
         mutatedData.showTutor = true;
     }
     await User.findOne(
-        { _id: req.params.id, clearance: 2 },
+        { _id: req.params.id, clearance: { $gte: 2 } },
         { password: 0 },
         (err, doc) => {
             if (err) return next(err);
