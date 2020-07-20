@@ -66,6 +66,17 @@ const postSignup = async (req, res, next) => {
     });
 };
 
+const getSettingsPage = async (req, res, next) => {
+    const mutatedData = { ...data };
+    if (req.user.clearance === 2) {
+        mutatedData.showTutor = true;
+    } else if (req.user.clearance === 3) {
+        mutatedData.showAdmin = true;
+        mutatedData.showTutor = true;
+    }
+    res.render('settings', mutatedData);
+};
+
 const getCurrentUserData = async (req, res, next) => {
     if (req.user === undefined) {
         return res.send({});
@@ -104,6 +115,7 @@ module.exports = {
     getLogout,
     getSignup,
     postSignup,
+    getSettingsPage,
     getCurrentUserData,
     getUsers,
     getUserById,

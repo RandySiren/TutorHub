@@ -2,6 +2,7 @@ const chalk = require('chalk');
 
 const { User } = require('../models/User');
 const { Course } = require('../models/Course');
+const { TutorRequest } = require('../models/TutorRequest');
 const data = require('../routes/data').links;
 
 const getTutorsAdd = (req, res) => {
@@ -55,12 +56,14 @@ const getTutorsPanel = (req, res) => {
     }
     return res.render('tutor', mutatedData);
 };
-const postTutor = async (req, res, next) => {
-    await User.findById(req.user._id, (err, doc) => {
+const becomeATutor = async (req, res, next) => {
+    await User.findById(req.user._id, async (err, doc) => {
         if (err) return next(err);
         if (doc.clearance < 2) {
-            doc.clearance = 2;
-            doc.save((err, doc) => {
+            const tutorRequest = new TutorRequest({
+                userId: doc._id,
+            });
+            await tutorRequest.save((err, doc) => {
                 if (err) return next(err);
             });
             return res.status(201).redirect('/');
@@ -103,7 +106,7 @@ module.exports = {
     getTutorsView,
     getTutorsViewById,
     getTutorsPanel,
-    postTutor,
+    becomeATutor,
     getTutors,
     getTutorsById,
     getTutorsByCourse,
