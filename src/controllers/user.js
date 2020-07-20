@@ -109,6 +109,18 @@ const getUserCourses = async (req, res, next) => {
         );
     });
 };
+
+const getUserTutors = async (req, res, next) => {
+    await User.findById(req.params.id, async (err, doc) => {
+        return res.send(
+            await Promise.all(
+                doc.tutors.map((tutorRawId) =>
+                    User.findById(tutorRawId, (err, doc) => doc)
+                )
+            )
+        );
+    });
+};
 module.exports = {
     getLogin,
     postLogin,
@@ -120,4 +132,5 @@ module.exports = {
     getUsers,
     getUserById,
     getUserCourses,
+    getUserTutors,
 };

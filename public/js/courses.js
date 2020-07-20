@@ -17,7 +17,6 @@ async function createCourseView(parentDiv) {
             tutorNames.forEach((tutor) => {
                 tutorText += `<a href=/tutors/view/${tutor._id}>${tutor.name}</a><br />`;
             });
-            const hasCourse1 = await hasCourse(data._id, userCourses);
             const courseData = {
                 class: 'btn-danger',
                 text: 'Remove Course',
@@ -184,7 +183,7 @@ async function createCourseAdd(parentDiv) {
                                                 </table>
                                             </div>
                                             <div class="modal-footer">
-                                                <button ty="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                 <button type="button" class="btn ${allCoursesData[index].class}" id="add-course-button-${index}">${allCoursesData[index].text}</button>
                                             </div>
                                         </div>

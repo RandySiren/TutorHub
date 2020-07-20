@@ -73,10 +73,14 @@ const becomeATutor = async (req, res, next) => {
 };
 
 const getTutors = async (req, res, next) => {
-    await User.find({ clearance: 2 }, { password: 0 }, (err, docs) => {
-        if (err) return next(err);
-        return res.send(docs);
-    });
+    await User.find(
+        { clearance: { $gte: 2 } },
+        { password: 0 },
+        (err, docs) => {
+            if (err) return next(err);
+            return res.send(docs);
+        }
+    );
 };
 
 const getTutorsById = async (req, res, next) => {
@@ -101,6 +105,37 @@ const getTutorsByCourse = async (req, res, next) => {
     );
 };
 
+const addTutorUser = async (req, res, next) => {
+    await User.findById(req.user._id, (err, doc) => {
+        const tutorId = req.params.id;
+        if (err) return next(err);
+        if (!doc.tutors.includes(tutorId)) {
+            doc.tutors.push(tutorId);
+            doc.save((err, doc) => {
+                if (err) return next(err);
+            });
+            return res.send({ message: 'Added' });
+        }
+        return res.send({ message: 'Not added' });
+    });
+};
+
+const removeTutorUser = async (req, res, next) => {
+    await User.findById(req.user._id, (err, doc) => {
+        const tutorId = req.params.id;
+        if (err) return next(err);
+        if (doc.tutors.includes(tutorId)) {
+            const index = doc.tutors.indexOf(tutorId);
+            doc.tutors.splice(index, 1);
+            doc.save((err, doc) => {
+                if (err) return next(err);
+            });
+            return res.send({ message: 'Removed' });
+        }
+        return res.send({ message: 'Not removed' });
+    });
+};
+
 module.exports = {
     getTutorsAdd,
     getTutorsView,
@@ -110,4 +145,6 @@ module.exports = {
     getTutors,
     getTutorsById,
     getTutorsByCourse,
+    addTutorUser,
+    removeTutorUser,
 };

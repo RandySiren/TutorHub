@@ -49,6 +49,7 @@ router.get('/user/settings', userController.getSettingsPage);
 router.get('/api/users', userController.getUsers);
 router.get('/api/users/:id', userController.getUserById);
 router.get('/api/users/:id/courses', userController.getUserCourses);
+router.get('/api/users/:id/tutors', userController.getUserTutors);
 router.get('/users/me', userController.getCurrentUserData);
 
 /**
@@ -60,6 +61,8 @@ router.get('/tutors/view/:id', tutorController.getTutorsViewById);
 router.get('/becomeatutor', tutorController.becomeATutor); // Change this to post later
 router.get('/api/tutors', tutorController.getTutors);
 router.get('/api/tutors/:id', tutorController.getTutorsById);
+router.post('/api/tutors/add/:id', tutorController.addTutorUser);
+router.post('/api/tutors/remove/:id', tutorController.removeTutorUser);
 router.get('/api/tutors/course/:id', tutorController.getTutorsByCourse);
 
 router.get('/tutor/panel', tutorController.getTutorsPanel);
