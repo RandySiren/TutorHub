@@ -9,7 +9,11 @@
             {{/each}}
             {{#if showTutor}}
             <li>
-                <a href="/tutors/panel"><i class="fas fa-user-cog"></i> Tutor Panel</a>
+                <a href="/tutor/panel"><i class="fas fa-user-cog"></i> Tutor Panel</a>
+            </li>
+            {{else}}
+            <li>
+                <a href="/becomeatutor"><i class="fas fa-user-tie"></i> Become a Tutor</a>
             </li>
             {{/if}}
             {{#if showAdmin}}

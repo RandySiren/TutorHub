@@ -20,7 +20,7 @@ CP317 Software Engineering Project
 
 List of things to add in the future but held off (not an exhaustive list)
 
-> Flash messages (connect-flash and express-session)
+> Search bar implementation for courses
 
 ## Installation
 

@@ -562,7 +562,7 @@ ul.nav.nav-second-level.collapse.in {
     border: 0px solid black;
 }
 .navbar-header {
-    background: red;
+    background: #ff9801;
 }
 .navbar-default .navbar-toggle:hover,
 .navbar-default .navbar-toggle:focus {

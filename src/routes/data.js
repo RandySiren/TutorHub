@@ -25,11 +25,6 @@ exports.links = {
             name: 'View My Tutors',
             icon: 'fa-tasks',
         },
-        {
-            route: '/becomeatutor',
-            name: 'Become a Tutor',
-            icon: 'fa-user-tie',
-        },
     ],
     showFullNavbar: true,
     showFullSidebar: true,

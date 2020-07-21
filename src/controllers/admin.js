@@ -4,7 +4,7 @@ const getAdminHome = (req, res) => {
     const mutatedData = { ...data };
     if (req.user.clearance === 2) {
         mutatedData.showTutor = true;
-    } else {
+    } else if (req.user.clearance === 3) {
         mutatedData.showAdmin = true;
         mutatedData.showTutor = true;
     }
