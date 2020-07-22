@@ -77,7 +77,7 @@ async function createCourseView(parentDiv) {
                                                 </table>
                                             </div>
                                             <div class="modal-footer">
-                                                <button ty="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                 <button type="button" class="btn ${allCoursesData[index].class}" id="add-course-button-${index}">${allCoursesData[index].text}</button>
                                             </div>
                                         </div>
@@ -93,6 +93,11 @@ async function createCourseView(parentDiv) {
         }
         parentDiv.appendChild(element);
     });
+    if (userCourses.length === 0) {
+        element.innerHTML += `
+        <h3>You have no Courses, go add some!</h3>`;
+        parentDiv.appendChild(element);
+    }
     for (let i = 0; i < userCourses.length; i += 1) {
         document
             .querySelector(`#add-course-button-${i}`)
