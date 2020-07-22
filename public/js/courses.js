@@ -93,6 +93,11 @@ async function createCourseView(parentDiv) {
         }
         parentDiv.appendChild(element);
     });
+    if (userCourses.length === 0) {
+        element.innerHTML += `
+        <h3>You have no Courses, go add some!</h3>`;
+        parentDiv.appendChild(element);
+    }
     for (let i = 0; i < userCourses.length; i += 1) {
         document
             .querySelector(`#add-course-button-${i}`)
