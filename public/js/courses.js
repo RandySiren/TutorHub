@@ -77,7 +77,7 @@ async function createCourseView(parentDiv) {
                                                 </table>
                                             </div>
                                             <div class="modal-footer">
-                                                <button ty="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                 <button type="button" class="btn ${allCoursesData[index].class}" id="add-course-button-${index}">${allCoursesData[index].text}</button>
                                             </div>
                                         </div>

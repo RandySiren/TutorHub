@@ -70,5 +70,8 @@ router.get('/tutor/panel', tutorController.getTutorsPanel);
  * Admin Routing
  */
 router.get('/admin/panel', adminController.getAdminHome);
+router.get('/admin/tutorrequests', adminController.getTutorRequests);
+router.delete('/admin/tutorrequests/accept/:id', adminController.acceptTutor);
+router.delete('/admin/tutorrequests/deny/:id', adminController.denyTutor);
 
 module.exports = router;
