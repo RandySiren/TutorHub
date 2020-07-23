@@ -17,6 +17,7 @@ passport.use(
     new LocalStrategy(
         { usernameField: 'email' },
         async (email, password, done) => {
+            console.log("Hello we're here");
             /* Search for same email user from database */
             await User.findOne(
                 { email: email.toLowerCase() },
