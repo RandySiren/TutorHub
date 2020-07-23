@@ -34,32 +34,45 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a href="#home" data-toggle="tab">Home</a>
-                                </li>
-                                <li class=""><a href="#profile" data-toggle="tab">Profile</a>
-                                </li>
-                                <li class=""><a href="#messages" data-toggle="tab">Messages</a>
-                                </li>
-                                <li class=""><a href="#settings" data-toggle="tab">Settings</a>
+                                <li class="active"><a href="#home" data-toggle="tab">Change My About Info</a>
                                 </li>
                             </ul>
 
                             <div class="tab-content">
                                 <div class="tab-pane fade active in" id="home">
-                                    <h4>Tab 1</h4>
-                                    <p>Tab 1 Stuff</p>
-                                </div>
-                                <div class="tab-pane fade" id="profile">
-                                    <h4>Tab 2</h4>
-                                    <p>Tab 2 Stuff</p>
-                                </div>
-                                <div class="tab-pane fade" id="messages">
-                                    <h4>Tab 3</h4>
-                                    <p>Tab 3 Stuff</p>
-                                </div>
-                                <div class="tab-pane fade" id="settings">
-                                    <h4>Tab 4</h4>
-                                    <p>Tab 4 Stuff</p>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <form method="POST" action="/tutors/update" role="form">
+                                                <br />
+                                                <div class="form-group">
+                                                    <label>About Yourself:</label>
+                                                    <textarea class="form-control" rows="3" id="aboutInput"
+                                                        name="aboutInput"
+                                                        placeholder="Write any fun facts that you'd like your students to know about you and why to select you!"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Available Times:</label>
+                                                    <textarea class="form-control" rows="5" id="timesInput"
+                                                        name="timesInput"
+                                                        placeholder="List what times you usually are free/busy to let students know about your schedule."></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Courses You Tutor:</label>
+                                                    <textarea class="form-control" rows="5" id="coursesInput"
+                                                        name="coursesInput"
+                                                        placeholder="Which courses and how strong you think you are in them."></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Availability Status:</label>
+                                                    <textarea class="form-control" rows="2" id="availabilityInput"
+                                                        name="availabilityInput"
+                                                        placeholder="Are you busy? Looking for students? Overwhelmed with responses? Your students would appreciate before contacting you"></textarea>
+                                                </div>
+                                                <button type="submit" class="btn btn-warning">Update</button>
+                                            </form>
+                                        </div>
+                                        <!-- /.col-lg-6 (nested) -->
+                                    </div>
                                 </div>
                             </div>
                         </div>

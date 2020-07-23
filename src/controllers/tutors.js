@@ -16,6 +16,18 @@ const getTutorsAdd = (req, res) => {
     return res.render('tutorAdd', mutatedData);
 };
 
+const updateAboutPage = async (req, res, next) => {
+    await User.findByIdAndUpdate(req.user._id, {
+        about: [
+            req.body.aboutInput,
+            req.body.timesInput,
+            req.body.coursesInput,
+            req.body.availabilityInput,
+        ],
+    }).exec();
+    res.redirect('/tutor/panel');
+};
+
 const getTutorsView = (req, res) => {
     const mutatedData = { ...data };
     if (req.user.clearance === 2) {
@@ -138,6 +150,7 @@ const removeTutorUser = async (req, res, next) => {
 
 module.exports = {
     getTutorsAdd,
+    updateAboutPage,
     getTutorsView,
     getTutorsViewById,
     getTutorsPanel,

@@ -4,9 +4,16 @@ document.addEventListener('DOMContentLoaded', async function () {
         createTutorAdd(parentDiv);
     } else {
         parentDiv = document.querySelector('#tutorViewDIV');
-        createTutorView(parentDiv);
+        if (parentDiv !== null) {
+            createTutorView(parentDiv);
+        } else {
+            parentDiv = document.querySelector('#tutorPageDIV');
+            createTutorPage(parentDiv);
+        }
     }
 });
+
+async function createTutorPage(parentDiv) {}
 
 async function createTutorView(parentDiv) {
     const userTutors = await getUserTutors();

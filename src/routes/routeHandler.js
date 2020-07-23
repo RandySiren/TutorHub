@@ -56,6 +56,7 @@ router.get('/users/me', userController.getCurrentUserData);
  * Tutor Routing
  */
 router.get('/tutors/add', tutorController.getTutorsAdd);
+router.post('/tutors/update', tutorController.updateAboutPage);
 router.get('/tutors/view', tutorController.getTutorsView);
 router.get('/tutors/view/:id', tutorController.getTutorsViewById);
 router.get('/becomeatutor', tutorController.becomeATutor); // Change this to post later

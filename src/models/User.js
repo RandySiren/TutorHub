@@ -37,7 +37,7 @@ const userSchema = new Schema({
         min: 1,
         max: 3,
     },
-    about: String,
+    about: [String],
 });
 
 /**
