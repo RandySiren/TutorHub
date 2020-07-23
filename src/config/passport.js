@@ -48,7 +48,7 @@ exports.isAuthenticated = (req, res, next) => {
 };
 
 /* Checks if user is a tutor */
-exports.isTUtor = (req, res, next) => {
+exports.isTutor = (req, res, next) => {
     if (req.user.clearance >= 2) return next();
     res.redirect('/');
 };

@@ -66,6 +66,17 @@ const postSignup = async (req, res, next) => {
     });
 };
 
+const getSettingsPage = async (req, res, next) => {
+    const mutatedData = { ...data };
+    if (req.user.clearance === 2) {
+        mutatedData.showTutor = true;
+    } else if (req.user.clearance === 3) {
+        mutatedData.showAdmin = true;
+        mutatedData.showTutor = true;
+    }
+    res.render('settings', mutatedData);
+};
+
 const getCurrentUserData = async (req, res, next) => {
     if (req.user === undefined) {
         return res.send({});
@@ -98,14 +109,28 @@ const getUserCourses = async (req, res, next) => {
         );
     });
 };
+
+const getUserTutors = async (req, res, next) => {
+    await User.findById(req.params.id, async (err, doc) => {
+        return res.send(
+            await Promise.all(
+                doc.tutors.map((tutorRawId) =>
+                    User.findById(tutorRawId, (err, doc) => doc)
+                )
+            )
+        );
+    });
+};
 module.exports = {
     getLogin,
     postLogin,
     getLogout,
     getSignup,
     postSignup,
+    getSettingsPage,
     getCurrentUserData,
     getUsers,
     getUserById,
     getUserCourses,
+    getUserTutors,
 };

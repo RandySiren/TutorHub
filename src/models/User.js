@@ -27,12 +27,17 @@ const userSchema = new Schema({
         type: Array,
         default: [],
     },
+    tutors: {
+        type: Array,
+        default: [],
+    },
     clearance: {
         type: Number,
         default: 1,
         min: 1,
         max: 3,
     },
+    about: [String],
 });
 
 /**
