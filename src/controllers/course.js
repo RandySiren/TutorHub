@@ -44,12 +44,12 @@ const postCourse = async (req, res, next) => {
         if (err) {
             if (err.code === 11000) {
                 console.error(chalk.red('Course/School combaination in use'));
-                return res.status(400).redirect('../../courses');
+                return res.status(400).redirect('../../tutor/panel');
             }
             return next(err);
         }
         console.log('Successfully added!');
-        return res.status(201).redirect('../../courses');
+        return res.status(201).redirect('../../tutor/panel');
     });
 };
 
