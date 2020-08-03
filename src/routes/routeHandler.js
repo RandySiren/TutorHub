@@ -21,6 +21,10 @@ router.get('/logout', userController.getLogout);
 router.get('/signup', userController.getSignup);
 router.post('/signup', userController.postSignup);
 
+router.get('/about', userController.getAbout);
+
+router.get('/home', userController.getHome);
+
 // Post Logged in Routing (everything beyond this point needs to be authenticated)
 router.all('*', auth.isAuthenticated);
 router.all('/admin/*', auth.isAdmin);

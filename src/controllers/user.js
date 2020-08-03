@@ -66,6 +66,22 @@ const postSignup = async (req, res, next) => {
     });
 };
 
+const getAbout = async (req, res, next) => {
+    if (req.user) return res.redirect('/');
+    const mutatedData = { ...data };
+    mutatedData.showFullNavbar = false;
+    mutatedData.showFullSidebar = false;
+    return res.render('about', mutatedData);
+};
+
+const getHome = async (req, res, next) => {
+    if (req.user) return res.redirect('/');
+    const mutatedData = { ...data };
+    mutatedData.showFullNavbar = false;
+    mutatedData.showFullSidebar = false;
+    return res.render('home2', mutatedData);
+};
+
 const getSettingsPage = async (req, res, next) => {
     const mutatedData = { ...data };
     if (req.user.clearance === 2) {
@@ -127,6 +143,8 @@ module.exports = {
     getLogout,
     getSignup,
     postSignup,
+    getAbout,
+    getHome,
     getSettingsPage,
     getCurrentUserData,
     getUsers,

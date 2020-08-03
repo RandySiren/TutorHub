@@ -17,12 +17,44 @@ const getTutorsAdd = (req, res) => {
 };
 
 const updateAboutPage = async (req, res, next) => {
+    const newAbout = {
+        aboutInput: '',
+        timesInput: '',
+        coursesInput: '',
+        availabilityInput: '',
+    };
+    await User.findById(req.user._id, (err, doc) => {
+        if (req.body.aboutInput === '') {
+            // eslint-disable-next-line prefer-destructuring
+            newAbout.aboutInput = doc.about[0];
+        } else {
+            newAbout.aboutInput = req.body.aboutInput;
+        }
+        if (req.body.timesInput === '') {
+            // eslint-disable-next-line prefer-destructuring
+            newAbout.timesInput = doc.about[1];
+        } else {
+            newAbout.timesInput = req.body.timesInput;
+        }
+        if (req.body.coursesInput === '') {
+            // eslint-disable-next-line prefer-destructuring
+            newAbout.coursesInput = doc.about[2];
+        } else {
+            newAbout.coursesInput = req.body.coursesInput;
+        }
+        if (req.body.availabilityInput === '') {
+            // eslint-disable-next-line prefer-destructuring
+            newAbout.availabilityInput = doc.about[3];
+        } else {
+            newAbout.availabilityInput = req.body.availabilityInput;
+        }
+    });
     await User.findByIdAndUpdate(req.user._id, {
         about: [
-            req.body.aboutInput,
-            req.body.timesInput,
-            req.body.coursesInput,
-            req.body.availabilityInput,
+            newAbout.aboutInput,
+            newAbout.timesInput,
+            newAbout.coursesInput,
+            newAbout.availabilityInput,
         ],
     }).exec();
     res.redirect('/tutor/panel');
