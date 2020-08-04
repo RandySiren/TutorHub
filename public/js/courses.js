@@ -150,7 +150,7 @@ async function createCourseAdd(parentDiv) {
                         <div class="col-md-4 col-sm-4">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    ${courseData.courseId}<br /> <i>${courseData.name}</i>
+                                    ${courseData.courseId}: ${courseData.name}<br /> <i>${courseData.school}</i>
                                 </div>
                                 <div class="panel-footer">
                                     <button class="btn btn-warning" data-toggle="modal" data-target="#myModal${index}">
