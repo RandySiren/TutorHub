@@ -1,3 +1,13 @@
+/*
+/Courses Webpage
+This code artifact allows users to access the currently offered courses, as well as add and update courses
+This was written by Mandeep Sran on July 30th 2020. 
+This was reviewed and approved by Joseph Power on August 1st 2020. 
+This file accesses the course database, as well as user data from /models/User
+This file updates CSS and HTML as the user is making course selections and that is the main output stream. 
+Test data for courses is found on sample.text
+
+*/
 document.addEventListener('DOMContentLoaded', async function () {
     let parentDiv = document.querySelector('#courseAddDIV');
     if (parentDiv !== null) {

@@ -1,3 +1,14 @@
+/*
+Tutor landing page javascript 
+This artifact extends the capabilities of the tutor class and provides the neccesary functions to implement all use cases
+This file was written by Mandeep Sran on July 30th and Approved by Joseph Power on August 1st.
+The functions include
+- createTutorView
+- createTutorAdd
+- updateTutor
+
+As well as getter methods to fetch tutors and their respective courses
+*/
 document.addEventListener('DOMContentLoaded', async function () {
     let parentDiv = document.querySelector('#tutorAddDIV');
     if (parentDiv !== null) {
@@ -13,7 +24,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 });
 
-async function createTutorPage(parentDiv) {}
+async function createTutorPage(parentDiv) { }
 
 async function createTutorView(parentDiv) {
     const userTutors = await getUserTutors();

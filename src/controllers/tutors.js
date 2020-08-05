@@ -1,3 +1,14 @@
+/*
+Tutor Page code Artifact
+The code artifact renders tutor data and provides an interface for users, tutors, and administrators.
+Code written by Mandeep Sran on July 24th 2020. 
+Code was reviewed and approved by Joseph Power on July 24th 2020.
+User, Course, and TutorRequest custom data models are loaded from /models/{modelName}
+The file provides the following functions:
+getTutorsAdd, updateAboutPage, getTutorsView, getTutorsViewById, getTutorsPanel, becomeATutor, getTutors, getTutorsById, getTutorsByCourse, addTutorUser, removeTutorUser,
+Artifact accesses the courses database, makes modifications to the TutorRequest and User models. 
+*/
+
 const chalk = require('chalk');
 
 const { User } = require('../models/User');

@@ -1,3 +1,9 @@
+/*
+Custom Object Oriented Class for course database.
+Written by Mandeep Sran on July 22nd 2020.
+Approved and Reviewed by Joseph Power on July 22nd 2020.
+*/
+
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;

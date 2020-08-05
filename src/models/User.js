@@ -1,3 +1,10 @@
+/*
+Custom Object Oriented Class for User Model
+Written by Mandeep Sran on July 22nd 2020.
+Approved and Reviewed by Joseph Power on July 22nd 2020.
+
+This artifact also provides necessary functions for login passport encryption, to ensure security.
+*/
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 
