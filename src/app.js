@@ -2,6 +2,16 @@
  * Application start point, all code will be documented with explanation of what it does.
  */
 
+//Prologue Comments
+/*
+This is the application start point and is executed when a user accesses the website. 
+This will download all required dependencies, connect to the host on a dedicated port, establish a connection with the database, as well as handle connection errors.
+Written by: Mandeep Sran on July 13th 2020.
+Approved by team and reviewed by Joseph Power and Brandon Dalri on July 13th 2020.
+This module accesses express js configuration files, as well as our Mongo Database, only through our server and not by the user for security reasons. 
+On Error, connection to the server will be retried through a page refresh. Connection with the server can result in a server error (500) which will need to be handled in the admin panel. (Server going down or files being removed from the server)
+*/
+
 /* List module dependencies */
 const express = require('express');
 const dotenv = require('dotenv');

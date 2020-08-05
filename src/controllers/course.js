@@ -1,3 +1,27 @@
+/*
+This artifact is for the courses page that can be accessed by any user once they have logged in.
+Written By: Manny Sran on July 21st 2020. 
+Reviewed by Joseph Power and approved on July 21st 2020. 
+
+The artifact provides the necessary components for standard website operation:
+    - Allowing users to view all courses being offered
+    - Allowing users to search courses by course ID
+    - Allowing tutors to post courses they would like to offer help with
+    - Allowing tutors and admins to remove courses 
+
+Through the use of the following functions getCoursesHome,  getCoursesAdd,  getCoursesView,  postCourse,  getCourses,  getCourseById,  addCourseUser,  removeCourseUser 
+
+User and Course modules are loaded from /models/ which are custom data models defined in their respective classes.
+
+Chalk is a node package for terminal string styling, it is only used to help with implementation and testing.
+
+This artifact contains error handling for duplicate course offerings as well as invalid data entry.
+
+The test data for courses can be found in Tutorhub/sample.txt
+
+Known Issues: The data entry is not 100% robust, we plan on implementing a database containing courses for selected educational institutions, so that tutors cannot post courses that do not exist. 
+*/
+
 const chalk = require('chalk');
 
 const { User } = require('../models/User');

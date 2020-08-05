@@ -1,3 +1,22 @@
+/*
+Code Artifact: Passport
+Passport is an authentication middleware for Node.js. We are using passport to authenticate login.
+Written By Mandeep Sran on July 16th 2020
+Approved by team and reviewed by Joseph Power on July 17th 2020.
+This module uses:
+User - The current user that has made a connection to the website.
+passport.use() - This method will take a user input for username / password, hash the password and search up the user:password combo in the database. 
+               -  message: 'Invalid email or password.', standard output for invalid email address or incorrect password. 
+               - 3 Alternative branches for successful login:
+                - If the user/password combination was succesful, log the user in and navigate to homepage.
+                - If the login was successful and the user is a tutor, load tutor modules and navigate to homepage
+                - If the login was successful and the user is an administrator, load administrator modules and navigate homepage.
+
+This module accesses the Mongo Database locally through the passport package, for security reasons we do not connect the user to the database directly. 
+This module only has output for unsuccessful login - "Invalid email or password."
+Sample test data can be found in sample.txt, the list of users in each permission level we used to test authentication. 
+*/
+
 const passport = require('passport');
 const { Strategy: LocalStrategy } = require('passport-local');
 

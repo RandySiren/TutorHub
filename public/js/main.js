@@ -1,3 +1,15 @@
+/*
+Main landing page javascript
+This artifact is ran when a user logs into the website and is redirected to the homepage
+Written by Mandeep Sran on July 30th 2020 and approved by Joseph Power on Aug 1st 2020.
+
+File extends capabilities with the following functions:
+- createTutorRequestAdminPanel (Creates panel for a tutor request)
+- getTutorRequests (Gets the list of open tutor requests)
+- updateRequest (Updates the status of a tutor request)
+
+
+*/
 document.addEventListener('DOMContentLoaded', async function () {
     let parentDiv = document.querySelector('#tutorrequests');
     if (parentDiv !== null) {

@@ -1,3 +1,17 @@
+/*
+User Module 
+This artifact loads user data upon a successful login attempt, including but not limited to:
+-Name, Settings, Courses, Tutors
+Also loads the About and Home pages.
+
+Code written by Mandeen Sran on July 22nd 2020. 
+Code reviewed and approved by Joseph Power on July 22nd 2020. 
+The artifacts assesses user and course models, located in /models/{ModelName}
+The artifact provides the following necessary functions to implement use cases of the user model:
+- getLogin, postLogin, getLogout, getSignup, postSignup, getAbout, getHome, getSettingsPage, getCurrentUserData, getUsers, getUserById, getUserCourses, getUserTutors,
+All functions provide necessary error handling to ensure the users session does not terminate during unexpected behaviour.
+*/
+
 const passport = require('passport');
 const chalk = require('chalk');
 
