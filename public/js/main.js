@@ -9,8 +9,8 @@ document.addEventListener('DOMContentLoaded', async function () {
 
 async function createTutorRequestAdminPanel(parentDiv) {
     const tutorRequests = await getTutorRequests();
-    const element = document.createElement('tr');
     await tutorRequests.map((tutorRequest, index) => {
+        const element = document.createElement('tr');
         element.innerHTML += `
         <td>${tutorRequest.name}</td>
         <td>${tutorRequest.email}</td>
